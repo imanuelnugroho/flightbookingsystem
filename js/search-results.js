@@ -134,18 +134,18 @@ function filterFlights() {
 }
 
 // Render flights dynamically
-function renderFlights(departureFlights, returnFlights) {
+function renderFlights(flights) {
   departureFlightsList.setAttribute('aria-busy', 'true');
   returnFlightsList.setAttribute('aria-busy', 'true');
 
   departureFlightsList.innerHTML = '';
   returnFlightsList.innerHTML = '';
 
-  if (departureFlights.length === 0) {
+  if (flights.filteredDepartureFlights.length === 0) {
     departureFlightsList.innerHTML = '<div class="no-results" role="alert">No departure flights found matching your search criteria.</div>';
     departureFlightsList.setAttribute('aria-busy', 'false');
   }else{
-    departureFlights.forEach(flight => {
+    flights.filteredDepartureFlights.forEach(flight => {
       const card = document.createElement('article');
       card.className = 'flight-card';
       card.setAttribute('role', 'listitem');
@@ -166,11 +166,11 @@ function renderFlights(departureFlights, returnFlights) {
     });
   }
 
-  if (returnFlights.length === 0) {
+  if (flights.filteredReturnFlights.length === 0) {
     returnFlightsList.innerHTML = '<div class="no-results" role="alert">No departure flights found matching your search criteria.</div>';
     returnFlightsList.setAttribute('aria-busy', 'false');
   }else{
-    returnFlights.forEach(flight => {
+    flights.filteredReturnFlights.forEach(flight => {
       const card = document.createElement('article');
       card.className = 'flight-card';
       card.setAttribute('role', 'listitem');
