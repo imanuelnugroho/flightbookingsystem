@@ -36,10 +36,6 @@ const returnTotal = renderFlightDetails(returnFlights, returnFlightList);
 const totalAmount = departureTotal + returnTotal;
 totalAmountDiv.innerHTML = `Total Amount: USD ${totalAmount.toFixed(2)}`;
 
-// Render selected flights
-renderFlightDetails(departureFlights, departureFlightList);
-renderFlightDetails(returnFlights, returnFlightList);
-
 // Payment button functionality
 document.getElementById('payButton').addEventListener('click', () => {
     alert('Proceeding to payment...');
