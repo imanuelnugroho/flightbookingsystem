@@ -6,6 +6,13 @@ function formatDateToYMD(date) {
   return `${y}-${m}-${d}`;
 }
 
+// Format date helper
+function formatDate(d) {
+  if (!d) return '';
+  const dateObj = new Date(d);
+  return dateObj.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
 // Utility to add days
 function addDays(date, days) {
   const copy = new Date(date);
