@@ -67,59 +67,132 @@ const returnDate = new Date(searchReturn);
 const dummyDepartureFlights = generateDummyFlights(departDate, addDays(departDate, 6), searchFrom, searchTo);
 const dummyReturnFlights = generateDummyFlights(returnDate, addDays(returnDate, 6), searchTo, searchFrom);
 
-// Combine both departure and return flights
-const allFlights = [...dummyDepartureFlights, ...dummyReturnFlights];
-
-const flightsList = document.getElementById('flightsList');
+// Define departure and return flights
+// const allFlights = [...dummyDepartureFlights, ...dummyReturnFlights];
+// const flightsList = document.getElementById('flightsList');
+const departureFlightsList = document.getElementById('departureFlights');
+const returnFlightsList = document.getElementById('returnFlights');
 const filterStopsSelect = document.getElementById('filterStops');
 
 // Filter flights based on query parameters and stops filter
 function filterFlights() {
   const stopsFilter = filterStopsSelect.value;
 
-  return allFlights.filter(flight => {
+  // return allFlights.filter(flight => {
+  //   // Match from/to cities (case insensitive)
+  //   const fromMatches = flight.from.toLowerCase() === searchFrom.toLowerCase() || flight.to.toLowerCase() === searchFrom.toLowerCase();
+  //   const toMatches = flight.to.toLowerCase() === searchTo.toLowerCase() || flight.from.toLowerCase() === searchTo.toLowerCase();
+  //   // Allow flights that match either direction
+  //   if (!fromMatches && !toMatches) return false;
+
+  //   // Match departure date if specified
+  //   if (searchDepart && flight.departureDate !== searchDepart) return false;
+
+  //   // Filter by stops
+  //   if (stopsFilter === 'nonstop' && flight.stops !== 0) return false;
+  //   if (stopsFilter === '1stop' && flight.stops !== 1) return false;
+  //   if (stopsFilter === '2plus' && flight.stops < 2) return false;
+
+  //   return true;
+  // });
+
+
+
+  const filteredDepartureFlights = dummyDepartureFlights.filter(flight => {
     // Match from/to cities (case insensitive)
-    // if (flight.from.toLowerCase() !== searchFrom.toLowerCase()) return false;
-    // if (flight.to.toLowerCase() !== searchTo.toLowerCase()) return false;
+    const fromMatches = flight.from.toLowerCase() === searchFrom.toLowerCase() || flight.to.toLowerCase() === searchFrom.toLowerCase();
+    const toMatches = flight.to.toLowerCase() === searchTo.toLowerCase() || flight.from.toLowerCase() === searchTo.toLowerCase();
+    // Allow flights that match either direction
+    if (!fromMatches && !toMatches) return false;
+
+    // Match departure date if specified
+    if (searchDepart && flight.departureDate !== searchDepart) return false;
 
     // Filter by stops
     if (stopsFilter === 'nonstop' && flight.stops !== 0) return false;
     if (stopsFilter === '1stop' && flight.stops !== 1) return false;
     if (stopsFilter === '2plus' && flight.stops < 2) return false;
-
     return true;
   });
+  const filteredReturnFlights = dummyReturnFlights.filter(flight => {
+    // Match from/to cities (case insensitive)
+    const fromMatches = flight.from.toLowerCase() === searchFrom.toLowerCase() || flight.to.toLowerCase() === searchFrom.toLowerCase();
+    const toMatches = flight.to.toLowerCase() === searchTo.toLowerCase() || flight.from.toLowerCase() === searchTo.toLowerCase();
+    // Allow flights that match either direction
+    if (!fromMatches && !toMatches) return false;
+
+    // Match departure date if specified
+    if (searchDepart && flight.departureDate !== searchDepart) return false;
+
+    // Filter by stops
+    if (stopsFilter === 'nonstop' && flight.stops !== 0) return false;
+    if (stopsFilter === '1stop' && flight.stops !== 1) return false;
+    if (stopsFilter === '2plus' && flight.stops < 2) return false;
+    return true;
+  });
+  return { filteredDepartureFlights, filteredReturnFlights };
 }
 
 // Render flights dynamically
-function renderFlights(flights) {
-  flightsList.setAttribute('aria-busy', 'true');
-  flightsList.innerHTML = '';
-  if (flights.length === 0) {
-    flightsList.innerHTML = '<div class="no-results" role="alert">No flights found matching your search criteria.</div>';
-    flightsList.setAttribute('aria-busy', 'false');
-    return;
+function renderFlights(departureFlights, returnFlights) {
+  departureFlightsList.setAttribute('aria-busy', 'true');
+  returnFlightsList.setAttribute('aria-busy', 'true');
+
+  departureFlightsList.innerHTML = '';
+  returnFlightsList.innerHTML = '';
+
+  if (departureFlights.length === 0) {
+    departureFlightsList.innerHTML = '<div class="no-results" role="alert">No departure flights found matching your search criteria.</div>';
+    departureFlightsList.setAttribute('aria-busy', 'false');
+  }else{
+    departureFlights.forEach(flight => {
+      const card = document.createElement('article');
+      card.className = 'flight-card';
+      card.setAttribute('role', 'listitem');
+      card.tabIndex = 0;
+
+      const stopsText = flight.stops === 0 ? 'Nonstop' : (flight.stops === 1 ? '1 Stop' : `${flight.stops} Stops`);
+
+      card.innerHTML = `
+        <div class="flight-route">${flight.from} → ${flight.to}</div>
+        <div class="flight-info">Departure: ${formatDate(flight.departureDate)}</div>
+        <div class="flight-info">Stops: ${stopsText}</div>
+        <div class="flight-info">Carrier: ${flight.carrier}</div>
+        <div class="flight-info">Duration: ${flight.duration}</div>
+        <div class="flight-info">Passengers: ${searchPassengers}</div>
+        <div class="flight-price">USD ${flight.price}</div>
+      `;
+      departureFlightsList.appendChild(card);
+    });
   }
-  flights.forEach(flight => {
-    const card = document.createElement('article');
-    card.className = 'flight-card';
-    card.setAttribute('role', 'listitem');
-    card.tabIndex = 0;
 
-    const stopsText = flight.stops === 0 ? 'Nonstop' : (flight.stops === 1 ? '1 Stop' : `${flight.stops} Stops`);
+  if (returnFlights.length === 0) {
+    returnFlightsList.innerHTML = '<div class="no-results" role="alert">No departure flights found matching your search criteria.</div>';
+    returnFlightsList.setAttribute('aria-busy', 'false');
+  }else{
+    returnFlights.forEach(flight => {
+      const card = document.createElement('article');
+      card.className = 'flight-card';
+      card.setAttribute('role', 'listitem');
+      card.tabIndex = 0;
 
-    card.innerHTML = `
-      <div class="flight-route">${flight.from} → ${flight.to}</div>
-      <div class="flight-info">Departure: ${formatDate(flight.departureDate)}</div>
-      <div class="flight-info">Stops: ${stopsText}</div>
-      <div class="flight-info">Carrier: ${flight.carrier}</div>
-      <div class="flight-info">Duration: ${flight.duration}</div>
-      <div class="flight-info">Passengers: ${searchPassengers}</div>
-      <div class="flight-price">USD ${flight.price}</div>
-    `;
-    flightsList.appendChild(card);
-  });
-  flightsList.setAttribute('aria-busy', 'false');
+      const stopsText = flight.stops === 0 ? 'Nonstop' : (flight.stops === 1 ? '1 Stop' : `${flight.stops} Stops`);
+
+      card.innerHTML = `
+        <div class="flight-route">${flight.from} → ${flight.to}</div>
+        <div class="flight-info">Departure: ${formatDate(flight.departureDate)}</div>
+        <div class="flight-info">Stops: ${stopsText}</div>
+        <div class="flight-info">Carrier: ${flight.carrier}</div>
+        <div class="flight-info">Duration: ${flight.duration}</div>
+        <div class="flight-info">Passengers: ${searchPassengers}</div>
+        <div class="flight-price">USD ${flight.price}</div>
+      `;
+      returnFlightsList.appendChild(card);
+    });
+  }
+  
+  departureFlightsList.setAttribute('aria-busy', 'false');
+  returnFlightsList.setAttribute('aria-busy', 'false');
 }
 
 // Initial display
