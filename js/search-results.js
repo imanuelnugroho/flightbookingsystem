@@ -185,7 +185,7 @@ document.getElementById('confirmSelection').addEventListener('click', () => {
     departureFlights: JSON.stringify(selectedDepartureFlights),
     returnFlights: JSON.stringify(selectedReturnFlights)
   });
-  window.location.href = `./web/confirmation.html?${params.toString()}`;
+  window.location.href = `../web/confirmation.html?${params.toString()}`;
 });
 
 // Initial display
