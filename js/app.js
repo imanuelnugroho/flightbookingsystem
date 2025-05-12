@@ -77,7 +77,7 @@ flightSearchForm.addEventListener('submit', (e) => {
     returnDate: ret || "",
     passengers: passengers
   });
-  window.location.href = `search-results.html?${params.toString()}`;
+  window.location.href = `web/search-results.html?${params.toString()}`;
 });
 
 // Users and roles handling (simulate database with localStorage)

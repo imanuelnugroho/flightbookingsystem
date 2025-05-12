@@ -68,8 +68,6 @@ const dummyDepartureFlights = generateDummyFlights(departDate, returnDate, searc
 const dummyReturnFlights = generateDummyFlights(returnDate, addDays(returnDate, 6), searchTo, searchFrom);
 
 // Define departure and return flights
-// const allFlights = [...dummyDepartureFlights, ...dummyReturnFlights];
-// const flightsList = document.getElementById('flightsList');
 const departureFlightsList = document.getElementById('departureFlights');
 const returnFlightsList = document.getElementById('returnFlights');
 const filterStopsSelect = document.getElementById('filterStops');
@@ -82,11 +80,9 @@ function filterFlights() {
     // Match from/to cities (case insensitive)
     const fromMatches = flight.from.toLowerCase() === searchFrom.toLowerCase();
     const toMatches = flight.to.toLowerCase() === searchTo.toLowerCase();
+
     // Allow flights that match either direction
     if (!fromMatches && !toMatches) return false;
-
-    // // Match departure date if specified
-    // if (searchDepart && flight.departureDate !== searchDepart) return false;
 
     // Filter by stops
     if (stopsFilter === 'nonstop' && flight.stops !== 0) return false;
@@ -99,11 +95,9 @@ function filterFlights() {
     // Match from/to cities (case insensitive)
     const fromMatches = flight.from.toLowerCase() === searchTo.toLowerCase();
     const toMatches = flight.to.toLowerCase() === searchFrom.toLowerCase();
+
     // Allow flights that match either direction
     if (!fromMatches && !toMatches) return false;
-
-    // // Match departure date if specified
-    // if (searchDepart && flight.departureDate !== searchDepart) return false;
 
     // Filter by stops
     if (stopsFilter === 'nonstop' && flight.stops !== 0) return false;
@@ -135,6 +129,7 @@ function renderFlights(flights) {
       const stopsText = flight.stops === 0 ? 'Nonstop' : (flight.stops === 1 ? '1 Stop' : `${flight.stops} Stops`);
 
       card.innerHTML = `
+        <input type="checkbox" class="flight-checkbox" data-flight='${JSON.stringify(flight)}' />
         <div class="flight-route">${flight.from} → ${flight.to}</div>
         <div class="flight-info">Departure: ${formatDate(flight.departureDate)}</div>
         <div class="flight-info">Stops: ${stopsText}</div>
@@ -148,7 +143,7 @@ function renderFlights(flights) {
   }
 
   if (flights.filteredReturnFlights.length === 0) {
-    returnFlightsList.innerHTML = '<div class="no-results" role="alert">No departure flights found matching your search criteria.</div>';
+    returnFlightsList.innerHTML = '<div class="no-results" role="alert">No return flights found matching your search criteria.</div>';
     returnFlightsList.setAttribute('aria-busy', 'false');
   }else{
     flights.filteredReturnFlights.forEach(flight => {
@@ -160,6 +155,7 @@ function renderFlights(flights) {
       const stopsText = flight.stops === 0 ? 'Nonstop' : (flight.stops === 1 ? '1 Stop' : `${flight.stops} Stops`);
 
       card.innerHTML = `
+        <input type="checkbox" class="flight-checkbox" data-flight='${JSON.stringify(flight)}' />
         <div class="flight-route">${flight.from} → ${flight.to}</div>
         <div class="flight-info">Departure: ${formatDate(flight.departureDate)}</div>
         <div class="flight-info">Stops: ${stopsText}</div>
@@ -175,6 +171,22 @@ function renderFlights(flights) {
   departureFlightsList.setAttribute('aria-busy', 'false');
   returnFlightsList.setAttribute('aria-busy', 'false');
 }
+
+// Confirm selection button functionality
+document.getElementById('confirmSelection').addEventListener('click', () => {
+  const selectedDepartureFlights = Array.from(document.querySelectorAll('#departureFlights .flight-checkbox:checked')).map(checkbox => JSON.parse(checkbox.dataset.flight));
+  const selectedReturnFlights = Array.from(document.querySelectorAll('#returnFlights .flight-checkbox:checked')).map(checkbox => JSON.parse(checkbox.dataset.flight));
+  if (selectedDepartureFlights.length === 0 && selectedReturnFlights.length === 0) {
+    alert('Please select at least one flight from either departure or return flights.');
+    return;
+  }
+  // Redirect to confirmation page with selected flights
+  const params = new URLSearchParams({
+    departureFlights: JSON.stringify(selectedDepartureFlights),
+    returnFlights: JSON.stringify(selectedReturnFlights)
+  });
+  window.location.href = `./web/confirmation.html?${params.toString()}`;
+});
 
 // Initial display
 renderFlights(filterFlights());
