@@ -64,7 +64,7 @@ const departDate = new Date(searchDepart);
 const returnDate = new Date(searchReturn);
 
 // Generate flights based on the current date
-const dummyDepartureFlights = generateDummyFlights(departDate, addDays(departDate, 6), searchFrom, searchTo);
+const dummyDepartureFlights = generateDummyFlights(departDate, returnDate, searchFrom, searchTo);
 const dummyReturnFlights = generateDummyFlights(returnDate, addDays(returnDate, 6), searchTo, searchFrom);
 
 // Define departure and return flights
@@ -77,7 +77,7 @@ const filterStopsSelect = document.getElementById('filterStops');
 // Filter flights based on query parameters and stops filter
 function filterFlights() {
   const stopsFilter = filterStopsSelect.value;
-  
+
   const filteredDepartureFlights = dummyDepartureFlights.filter(flight => {
     // Match from/to cities (case insensitive)
     const fromMatches = flight.from.toLowerCase() === searchFrom.toLowerCase();
