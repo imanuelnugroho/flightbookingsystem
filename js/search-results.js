@@ -6,9 +6,6 @@ function formatDateToYMD(date) {
   return `${y}-${m}-${d}`;
 }
 
-// Get today's date
-const today = new Date();
-
 // Utility to add days
 function addDays(date, days) {
   const copy = new Date(date);
@@ -17,7 +14,7 @@ function addDays(date, days) {
 }
 
 // Generate dummy flight data for testing
-const generateDummyFlights = (startDate, returnDate) => {
+const generateDummyFlights = (startDate, endDate, from, to) => {
   const flights = [];
   const destinations = [
     { from: "Jakarta", to: "Kuala Lumpur", price: 150, duration: "2h 30m" },
@@ -25,53 +22,49 @@ const generateDummyFlights = (startDate, returnDate) => {
     // Add more routes as needed
   ];
 
-  // Generate flights for the next 7 days
-  for (let i = 0; i < 7; i++) {
-    const departureDate = formatDateToYMD(addDays(startDate, i));
+  // Generate flights for the specified date range
+  for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
+    const departureDate = formatDateToYMD(date);
     destinations.forEach(destination => {
-      flights.push({
-        id: flights.length + 1,
-        from: destination.from,
-        to: destination.to,
-        departureDate: departureDate,
-        stops: Math.floor(Math.random() * 2), // Random stops (0 or 1)
-        price: destination.price + Math.floor(Math.random() * 50), // Random price
-        carrier: "AirAsia",
-        duration: destination.duration
-      });
+      if (destination.from === from && destination.to === to) {
+        flights.push({
+          id: flights.length + 1,
+          from: destination.from,
+          to: destination.to,
+          departureDate: departureDate,
+          stops: Math.floor(Math.random() * 2), // Random stops (0 or 1)
+          price: destination.price + Math.floor(Math.random() * 50), // Random price
+          carrier: "AirAsia",
+          duration: destination.duration
+        });
+      }
     });
   }
 
   return flights;
 };
 
-// Generate flights based on the current date
-const dummyFlights = generateDummyFlights(today);
-
-// Return flights for the next 7 days from Kuala Lumpur to Jakarta
-const returnFlights = generateDummyFlights(addDays(today, 3), true);
-
-// Combine both departure and return flights
-const allFlights = [...dummyFlights, ...returnFlights];
-
-const flightsList = document.getElementById('flightsList');
-const filterStopsSelect = document.getElementById('filterStops');
-
 // Read URL query parameters
 const urlParams = new URLSearchParams(window.location.search);
 const searchFrom = urlParams.get('from') || '';
 const searchTo = urlParams.get('to') || '';
 const searchDepart = urlParams.get('departDate') || '';
+const searchReturn = urlParams.get('returnDate') || '';
 const searchPassengers = parseInt(urlParams.get('passengers') || '1', 10);
 
-document.title = `Flights: ${searchFrom} → ${searchTo}`;
+// Get the departure and return dates
+const departDate = new Date(searchDepart);
+const returnDate = new Date(searchReturn);
 
-// Format date helper
-function formatDate(d) {
-  if (!d) return '';
-  const dateObj = new Date(d);
-  return dateObj.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
-}
+// Generate flights based on the current date
+const dummyDepartureFlights = generateDummyFlights(departDate, addDays(departDate, 6), searchFrom, searchTo);
+const dummyReturnFlights = generateDummyFlights(returnDate, addDays(returnDate, 6), searchTo, searchFrom);
+
+// Combine both departure and return flights
+const allFlights = [...dummyDepartureFlights, ...dummyReturnFlights];
+
+const flightsList = document.getElementById('flightsList');
+const filterStopsSelect = document.getElementById('filterStops');
 
 // Filter flights based on query parameters and stops filter
 function filterFlights() {
@@ -81,8 +74,6 @@ function filterFlights() {
     // Match from/to cities (case insensitive)
     if (flight.from.toLowerCase() !== searchFrom.toLowerCase()) return false;
     if (flight.to.toLowerCase() !== searchTo.toLowerCase()) return false;
-    // Match departure date if specified
-    if (searchDepart && flight.departureDate !== searchDepart) return false;
 
     // Filter by stops
     if (stopsFilter === 'nonstop' && flight.stops !== 0) return false;
