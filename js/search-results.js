@@ -77,27 +77,7 @@ const filterStopsSelect = document.getElementById('filterStops');
 // Filter flights based on query parameters and stops filter
 function filterFlights() {
   const stopsFilter = filterStopsSelect.value;
-
-  // return allFlights.filter(flight => {
-  //   // Match from/to cities (case insensitive)
-  //   const fromMatches = flight.from.toLowerCase() === searchFrom.toLowerCase() || flight.to.toLowerCase() === searchFrom.toLowerCase();
-  //   const toMatches = flight.to.toLowerCase() === searchTo.toLowerCase() || flight.from.toLowerCase() === searchTo.toLowerCase();
-  //   // Allow flights that match either direction
-  //   if (!fromMatches && !toMatches) return false;
-
-  //   // Match departure date if specified
-  //   if (searchDepart && flight.departureDate !== searchDepart) return false;
-
-  //   // Filter by stops
-  //   if (stopsFilter === 'nonstop' && flight.stops !== 0) return false;
-  //   if (stopsFilter === '1stop' && flight.stops !== 1) return false;
-  //   if (stopsFilter === '2plus' && flight.stops < 2) return false;
-
-  //   return true;
-  // });
-
-
-
+  
   const filteredDepartureFlights = dummyDepartureFlights.filter(flight => {
     // Match from/to cities (case insensitive)
     const fromMatches = flight.from.toLowerCase() === searchFrom.toLowerCase();
@@ -114,10 +94,11 @@ function filterFlights() {
     if (stopsFilter === '2plus' && flight.stops < 2) return false;
     return true;
   });
+
   const filteredReturnFlights = dummyReturnFlights.filter(flight => {
     // Match from/to cities (case insensitive)
-    const fromMatches = flight.from.toLowerCase() === searchFrom.toLowerCase();
-    const toMatches = flight.to.toLowerCase() === searchTo.toLowerCase();
+    const fromMatches = flight.from.toLowerCase() === searchTo.toLowerCase();
+    const toMatches = flight.to.toLowerCase() === searchFrom.toLowerCase();
     // Allow flights that match either direction
     if (!fromMatches && !toMatches) return false;
 
