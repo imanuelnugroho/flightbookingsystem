@@ -31,14 +31,17 @@ header {
   z-index: 1000;
   box-shadow: 0 4px 15px rgb(0 0 0 / 0.15);
 }
+
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap; /* Allow wrapping for mobile */
 }
+
 .logo {
   font-weight: 900;
-  font-size: 1.7rem;
+  font-size: 1.5rem; /* Adjusted for better visibility */
   letter-spacing: 2px;
   user-select: none;
 }
@@ -46,15 +49,18 @@ header {
 nav {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
+  flex-wrap: wrap; /* Allow wrapping for mobile */
 }
+
 nav a {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.9rem; /* Adjusted for better visibility */
   padding: 5px 8px;
   border-radius: 3px;
   transition: background-color 0.3s ease;
 }
+
 nav a:hover,
 nav a:focus {
   background-color: #9e0808;
@@ -63,15 +69,82 @@ nav a:focus {
 /* Icons for account & cart & login */
 .nav-icons {
   display: flex;
-  gap: 15px;
+  gap: 10px; /* Reduced gap for better spacing */
   font-size: 1.4rem;
   cursor: pointer;
+  flex-wrap: wrap; /* Allow wrapping for mobile */
 }
+
 .nav-icons span {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+/* User panel */
+.user-panel {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: white;
+  font-weight: 600;
+  flex-wrap: wrap; /* Allow wrapping for mobile */
+}
+
+.user-panel span {
+  padding: 5px 8px;
+  background: #a10909;
+  border-radius: 4px;
+}
+
+.user-panel button {
+  background: transparent;
+  border: 1.5px solid white;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 7px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.user-panel button:hover,
+.user-panel button:focus {
+  background-color: white;
+  color: #d41111;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the start */
+  }
+
+  nav {
+    display: none; /* Hide navigation links on mobile */
+  }
+
+  .nav-icons {
+    justify-content: space-between; /* Space out icons */
+    width: 100%; /* Full width for icons */
+  }
+
+  .user-panel {
+    justify-content: flex-start; /* Align user panel items to the start */
+    width: 100%; /* Full width for user panel */
+  }
+
+  .user-panel span {
+    font-size: 0.9rem; /* Adjust font size for mobile */
+  }
+
+  .user-panel button {
+    font-size: 0.9rem; /* Adjust font size for mobile */
+    padding: 5px 8px; /* Adjust padding for mobile */
+  }
+}
+
 
 /* Hero Section with Flight Search */
 .hero {
