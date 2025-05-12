@@ -100,8 +100,8 @@ function filterFlights() {
 
   const filteredDepartureFlights = dummyDepartureFlights.filter(flight => {
     // Match from/to cities (case insensitive)
-    const fromMatches = flight.from.toLowerCase() === searchFrom.toLowerCase() || flight.to.toLowerCase() === searchFrom.toLowerCase();
-    const toMatches = flight.to.toLowerCase() === searchTo.toLowerCase() || flight.from.toLowerCase() === searchTo.toLowerCase();
+    const fromMatches = flight.from.toLowerCase() === searchFrom.toLowerCase();
+    const toMatches = flight.to.toLowerCase() === searchTo.toLowerCase();
     // Allow flights that match either direction
     if (!fromMatches && !toMatches) return false;
 
@@ -116,8 +116,8 @@ function filterFlights() {
   });
   const filteredReturnFlights = dummyReturnFlights.filter(flight => {
     // Match from/to cities (case insensitive)
-    const fromMatches = flight.from.toLowerCase() === searchFrom.toLowerCase() || flight.to.toLowerCase() === searchFrom.toLowerCase();
-    const toMatches = flight.to.toLowerCase() === searchTo.toLowerCase() || flight.from.toLowerCase() === searchTo.toLowerCase();
+    const fromMatches = flight.from.toLowerCase() === searchFrom.toLowerCase();
+    const toMatches = flight.to.toLowerCase() === searchTo.toLowerCase();
     // Allow flights that match either direction
     if (!fromMatches && !toMatches) return false;
 
