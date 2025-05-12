@@ -79,8 +79,8 @@ function filterFlights() {
 
   return allFlights.filter(flight => {
     // Match from/to cities (case insensitive)
-    if (flight.from.toLowerCase() !== searchFrom.toLowerCase()) return false;
-    if (flight.to.toLowerCase() !== searchTo.toLowerCase()) return false;
+    // if (flight.from.toLowerCase() !== searchFrom.toLowerCase()) return false;
+    // if (flight.to.toLowerCase() !== searchTo.toLowerCase()) return false;
 
     // Filter by stops
     if (stopsFilter === 'nonstop' && flight.stops !== 0) return false;
