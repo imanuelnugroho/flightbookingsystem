@@ -1,21 +1,122 @@
-// Dummy flight data for multiple city combinations and dates
-const dummyFlights = [
-  // Sample flights with varying routes, dates, stops, prices
-  { id: 1, from: "Bangkok", to: "Dubai", departureDate: "2024-07-10", stops: 0, price: 320, carrier: "AirAsia", duration: "6h 45m" },
-  { id: 2, from: "Dubai", to: "Seoul", departureDate: "2024-07-11", stops: 1, price: 450, carrier: "AirAsia", duration: "10h 15m" },
-  { id: 3, from: "Singapore", to: "Tokyo", departureDate: "2024-07-12", stops: 0, price: 380, carrier: "AirAsia", duration: "7h 30m" },
-  { id: 4, from: "Jakarta", to: "Dubai", departureDate: "2024-07-10", stops: 2, price: 280, carrier: "AirAsia", duration: "9h 00m" },
-  { id: 5, from: "Bangkok", to: "Dubai", departureDate: "2024-07-11", stops: 0, price: 310, carrier: "AirAsia", duration: "6h 50m" },
-  { id: 6, from: "Manila", to: "Dubai", departureDate: "2024-07-10", stops: 1, price: 400, carrier: "AirAsia", duration: "8h 40m" },
-  { id: 7, from: "Mumbai", to: "Tokyo", departureDate: "2024-07-10", stops: 0, price: 420, carrier: "AirAsia", duration: "7h 10m" },
-  { id: 8, from: "Dubai", to: "Singapore", departureDate: "2024-07-10", stops: 1, price: 350, carrier: "AirAsia", duration: "8h 20m" },
+// Helper function to format date as YYYY-MM-DD from a Date object
+function formatDateToYMD(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
 
-  // Additional dummy flights for other combinations
-  { id: 9, from: "Tokyo", to: "Bangkok", departureDate: "2024-07-15", stops: 0, price: 360, carrier: "AirAsia", duration: "6h 20m" },
-  { id: 10, from: "Seoul", to: "Manila", departureDate: "2024-07-10", stops: 1, price: 400, carrier: "AirAsia", duration: "7h 50m" },
-  { id: 11, from: "Kuala Lumpur", to: "Jakarta", departureDate: "2024-07-13", stops: 0, price: 220, carrier: "AirAsia", duration: "2h 10m" },
-  { id: 12, from: "Taipei", to: "Ho Chi Minh City", departureDate: "2024-07-11", stops: 1, price: 290, carrier: "AirAsia", duration: "3h 30m" }
+const today = new Date();
+const tomorrow = new Date(today);
+tomorrow.setDate(today.getDate() + 1);
+const dayAfterTomorrow = new Date(today);
+dayAfterTomorrow.setDate(today.getDate() + 2);
+
+// Dynamic dummy flight data with dates based on current date
+const dummyFlights = [
+  {
+    id: 1,
+    from: "Bangkok",
+    to: "Dubai",
+    departureDate: formatDateToYMD(today),
+    stops: 0,
+    price: 320,
+    carrier: "AirAsia",
+    duration: "6h 45m"
+  },
+  {
+    id: 2,
+    from: "Dubai",
+    to: "Seoul",
+    departureDate: formatDateToYMD(tomorrow),
+    stops: 1,
+    price: 450,
+    carrier: "AirAsia",
+    duration: "10h 15m"
+  },
+  {
+    id: 3,
+    from: "Singapore",
+    to: "Tokyo",
+    departureDate: formatDateToYMD(dayAfterTomorrow),
+    stops: 0,
+    price: 380,
+    carrier: "AirAsia",
+    duration: "7h 30m"
+  },
+  {
+    id: 4,
+    from: "Jakarta",
+    to: "Dubai",
+    departureDate: formatDateToYMD(today),
+    stops: 2,
+    price: 280,
+    carrier: "AirAsia",
+    duration: "9h 00m"
+  },
+  {
+    id: 5,
+    from: "Bangkok",
+    to: "Dubai",
+    departureDate: formatDateToYMD(tomorrow),
+    stops: 0,
+    price: 310,
+    carrier: "AirAsia",
+    duration: "6h 50m"
+  },
+  {
+    id: 6,
+    from: "Manila",
+    to: "Dubai",
+    departureDate: formatDateToYMD(today),
+    stops: 1,
+    price: 400,
+    carrier: "AirAsia",
+    duration: "8h 40m"
+  },
+  {
+    id: 7,
+    from: "Mumbai",
+    to: "Tokyo",
+    departureDate: formatDateToYMD(today),
+    stops: 0,
+    price: 420,
+    carrier: "AirAsia",
+    duration: "7h 10m"
+  },
+  {
+    id: 8,
+    from: "Dubai",
+    to: "Singapore",
+    departureDate: formatDateToYMD(today),
+    stops: 1,
+    price: 350,
+    carrier: "AirAsia",
+    duration: "8h 20m"
+  },
+  // New entry for Jakarta to Kuala Lumpur with dynamic dates
+  {
+    id: 9,
+    from: "Jakarta",
+    to: "Kuala Lumpur",
+    departureDate: formatDateToYMD(tomorrow),
+    stops: 0,
+    price: 150,
+    carrier: "AirAsia",
+    duration: "2h 30m"
+  },
+  {
+    id: 10,
+    from: "Jakarta",
+    to: "Kuala Lumpur",
+    departureDate: formatDateToYMD(dayAfterTomorrow),
+    stops: 1,
+    price: 140,
+    carrier: "AirAsia",
+    duration: "3h 0m"
+  }
 ];
+
 
 const flightsList = document.getElementById('flightsList');
 const filterStopsSelect = document.getElementById('filterStops');
