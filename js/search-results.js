@@ -6,11 +6,8 @@ function formatDateToYMD(date) {
   return `${y}-${m}-${d}`;
 }
 
+// Get today's date
 const today = new Date();
-const tomorrow = new Date(today);
-tomorrow.setDate(today.getDate() + 1);
-const dayAfterTomorrow = new Date(today);
-dayAfterTomorrow.setDate(today.getDate() + 2);
 
 // Utility to add days
 function addDays(date, days) {
@@ -19,121 +16,43 @@ function addDays(date, days) {
   return copy;
 }
 
-const dummyFlights = [
-  {
-    id: 1,
-    from: "Bangkok",
-    to: "Dubai",
-    departureDate: formatDateToYMD(today),
-    stops: 0,
-    price: 320,
-    carrier: "AirAsia",
-    duration: "6h 45m"
-  },
-  {
-    id: 2,
-    from: "Dubai",
-    to: "Seoul",
-    departureDate: formatDateToYMD(tomorrow),
-    stops: 1,
-    price: 450,
-    carrier: "AirAsia",
-    duration: "10h 15m"
-  },
-  {
-    id: 3,
-    from: "Singapore",
-    to: "Tokyo",
-    departureDate: formatDateToYMD(dayAfterTomorrow),
-    stops: 0,
-    price: 380,
-    carrier: "AirAsia",
-    duration: "7h 30m"
-  },
-  {
-    id: 4,
-    from: "Jakarta",
-    to: "Dubai",
-    departureDate: formatDateToYMD(today),
-    stops: 2,
-    price: 280,
-    carrier: "AirAsia",
-    duration: "9h 00m"
-  },
-  {
-    id: 5,
-    from: "Bangkok",
-    to: "Dubai",
-    departureDate: formatDateToYMD(tomorrow),
-    stops: 0,
-    price: 310,
-    carrier: "AirAsia",
-    duration: "6h 50m"
-  },
-  {
-    id: 6,
-    from: "Manila",
-    to: "Dubai",
-    departureDate: formatDateToYMD(today),
-    stops: 1,
-    price: 400,
-    carrier: "AirAsia",
-    duration: "8h 40m"
-  },
-  {
-    id: 7,
-    from: "Mumbai",
-    to: "Tokyo",
-    departureDate: formatDateToYMD(today),
-    stops: 0,
-    price: 420,
-    carrier: "AirAsia",
-    duration: "7h 10m"
-  },
-  {
-    id: 8,
-    from: "Dubai",
-    to: "Singapore",
-    departureDate: formatDateToYMD(today),
-    stops: 1,
-    price: 350,
-    carrier: "AirAsia",
-    duration: "8h 20m"
-  },
-  {
-    id: 9,
-    from: "Jakarta",
-    to: "Kuala Lumpur",
-    departureDate: formatDateToYMD(tomorrow),
-    stops: 0,
-    price: 150,
-    carrier: "AirAsia",
-    duration: "2h 30m"
-  },
-  {
-    id: 10,
-    from: "Jakarta",
-    to: "Kuala Lumpur",
-    departureDate: formatDateToYMD(dayAfterTomorrow),
-    stops: 1,
-    price: 140,
-    carrier: "AirAsia",
-    duration: "3h 0m"
-  },
-  // Return flights from Kuala Lumpur to Jakarta for the next 7 days
-  ...Array(7).fill(0).map((_, i) => ({
-    id: 11 + i,
-    from: "Kuala Lumpur",
-    to: "Jakarta",
-    departureDate: formatDateToYMD(addDays(today, 3 + i)), // starting 3 days after today, next 7 days
-    stops: Math.floor(Math.random() * 2), // 0 or 1 stops randomly
-    price: 150 + Math.floor(Math.random() * 50), // 150 to 200 USD price range
-    carrier: "AirAsia",
-    duration: "2h 30m"
-  }))
-];
+// Generate dummy flight data for testing
+const generateDummyFlights = (startDate, returnDate) => {
+  const flights = [];
+  const destinations = [
+    { from: "Jakarta", to: "Kuala Lumpur", price: 150, duration: "2h 30m" },
+    { from: "Kuala Lumpur", to: "Jakarta", price: 160, duration: "2h 30m" },
+    // Add more routes as needed
+  ];
 
+  // Generate flights for the next 7 days
+  for (let i = 0; i < 7; i++) {
+    const departureDate = formatDateToYMD(addDays(startDate, i));
+    destinations.forEach(destination => {
+      flights.push({
+        id: flights.length + 1,
+        from: destination.from,
+        to: destination.to,
+        departureDate: departureDate,
+        stops: Math.floor(Math.random() * 2), // Random stops (0 or 1)
+        price: destination.price + Math.floor(Math.random() * 50), // Random price
+        carrier: "AirAsia",
+        duration: destination.duration
+      });
+    });
+  }
 
+  return flights;
+};
+
+// Generate flights based on the current date
+const dummyFlights = generateDummyFlights(today);
+
+// Return flights for the next 7 days from Kuala Lumpur to Jakarta
+const returnFlights = generateDummyFlights(addDays(today, 3), true);
+
+// Combine both departure and return flights
+const allFlights = [...dummyFlights, ...returnFlights];
 
 const flightsList = document.getElementById('flightsList');
 const filterStopsSelect = document.getElementById('filterStops');
@@ -158,7 +77,7 @@ function formatDate(d) {
 function filterFlights() {
   const stopsFilter = filterStopsSelect.value;
 
-  return dummyFlights.filter(flight => {
+  return allFlights.filter(flight => {
     // Match from/to cities (case insensitive)
     if (flight.from.toLowerCase() !== searchFrom.toLowerCase()) return false;
     if (flight.to.toLowerCase() !== searchTo.toLowerCase()) return false;
