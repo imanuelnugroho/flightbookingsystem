@@ -34,7 +34,7 @@ setMinDates();
 departDateInput.addEventListener('change', () => {
   if (departDateInput.value) {
     returnDateInput.min = departDateInput.value;
-    if(returnDateInput.value && returnDateInput.value  departDateInput.value) {
+    if(returnDateInput.value && returnDateInput.value < departDateInput.value) {
       returnDateInput.value = '';
     }
   }
@@ -64,7 +64,7 @@ flightSearchForm.addEventListener('submit', (e) => {
     alert("Please select a departure date.");
     return;
   }
-  if (ret && ret  depart) {
+  if (ret && ret < depart) {
     alert("Return date cannot be before departure date.");
     return;
   }
