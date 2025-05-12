@@ -101,3 +101,23 @@ button:hover, button:focus {
   cursor: pointer;
   user-select: none;
 }
+.search-button {
+  background-color: #d41111;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Make button full-width */
+}
+
+.full-width {
+  width: 100%; /* Ensure full width for this button */
+}
+
+/* Add any additional styles for hover/focus states */
+.search-button:hover, .search-button:focus {
+  background-color: #a10909;
+}
