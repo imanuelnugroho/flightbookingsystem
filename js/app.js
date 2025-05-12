@@ -34,7 +34,7 @@ setMinDates();
 departDateInput.addEventListener('change', () => {
   if (departDateInput.value) {
     returnDateInput.min = departDateInput.value;
-    if(returnDateInput.value && returnDateInput.value < departDateInput.value) {
+    if(returnDateInput.value && departDateInput && returnDateInput.value < departDateInput.value) {
       returnDateInput.value = '';
     }
   }
