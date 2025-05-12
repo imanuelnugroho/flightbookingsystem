@@ -12,7 +12,13 @@ tomorrow.setDate(today.getDate() + 1);
 const dayAfterTomorrow = new Date(today);
 dayAfterTomorrow.setDate(today.getDate() + 2);
 
-// Dynamic dummy flight data with dates based on current date
+// Utility to add days
+function addDays(date, days) {
+  const copy = new Date(date);
+  copy.setDate(copy.getDate() + days);
+  return copy;
+}
+
 const dummyFlights = [
   {
     id: 1,
@@ -94,7 +100,6 @@ const dummyFlights = [
     carrier: "AirAsia",
     duration: "8h 20m"
   },
-  // New entry for Jakarta to Kuala Lumpur with dynamic dates
   {
     id: 9,
     from: "Jakarta",
@@ -114,8 +119,20 @@ const dummyFlights = [
     price: 140,
     carrier: "AirAsia",
     duration: "3h 0m"
-  }
+  },
+  // Return flights from Kuala Lumpur to Jakarta for the next 7 days
+  ...Array(7).fill(0).map((_, i) => ({
+    id: 11 + i,
+    from: "Kuala Lumpur",
+    to: "Jakarta",
+    departureDate: formatDateToYMD(addDays(today, 3 + i)), // starting 3 days after today, next 7 days
+    stops: Math.floor(Math.random() * 2), // 0 or 1 stops randomly
+    price: 150 + Math.floor(Math.random() * 50), // 150 to 200 USD price range
+    carrier: "AirAsia",
+    duration: "2h 30m"
+  }))
 ];
+
 
 
 const flightsList = document.getElementById('flightsList');
