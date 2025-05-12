@@ -105,8 +105,8 @@ function filterFlights() {
     // Allow flights that match either direction
     if (!fromMatches && !toMatches) return false;
 
-    // Match departure date if specified
-    if (searchDepart && flight.departureDate !== searchDepart) return false;
+    // // Match departure date if specified
+    // if (searchDepart && flight.departureDate !== searchDepart) return false;
 
     // Filter by stops
     if (stopsFilter === 'nonstop' && flight.stops !== 0) return false;
@@ -121,8 +121,8 @@ function filterFlights() {
     // Allow flights that match either direction
     if (!fromMatches && !toMatches) return false;
 
-    // Match departure date if specified
-    if (searchDepart && flight.departureDate !== searchDepart) return false;
+    // // Match departure date if specified
+    // if (searchDepart && flight.departureDate !== searchDepart) return false;
 
     // Filter by stops
     if (stopsFilter === 'nonstop' && flight.stops !== 0) return false;
