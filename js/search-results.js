@@ -33,7 +33,7 @@ const generateDummyFlights = (startDate, endDate, from, to) => {
   for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
     const departureDate = formatDateToYMD(date);
     destinations.forEach(destination => {
-      if (destination.from === from && destination.to === to) {
+      if ((destination.from === from && destination.to === to) || (destination.from === to && destination.to === from)) {
         flights.push({
           id: flights.length + 1,
           from: destination.from,
