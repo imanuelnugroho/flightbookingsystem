@@ -136,7 +136,7 @@ function renderFlights(flights) {
         <div class="flight-info">Carrier: ${flight.carrier}</div>
         <div class="flight-info">Duration: ${flight.duration}</div>
         <div class="flight-info">Passengers: ${searchPassengers}</div>
-        <div class="flight-price">USD ${flight.price}</div>
+        <div class="flight-price">MYR ${flight.price}</div>
       `;
       departureFlightsList.appendChild(card);
     });
@@ -162,7 +162,7 @@ function renderFlights(flights) {
         <div class="flight-info">Carrier: ${flight.carrier}</div>
         <div class="flight-info">Duration: ${flight.duration}</div>
         <div class="flight-info">Passengers: ${searchPassengers}</div>
-        <div class="flight-price">USD ${flight.price}</div>
+        <div class="flight-price">MYR ${flight.price}</div>
       `;
       returnFlightsList.appendChild(card);
     });
