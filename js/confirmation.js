@@ -40,7 +40,6 @@ function renderFlightDetails(flights, container, currency) {
         container.appendChild(flightInfo);
         total += price; // Add to total
     });
-    isPostBack = true;
     return total; // Return total amount for this flight list
 }
 
@@ -51,6 +50,7 @@ function updateTotalAmount() {
     const selectedCurrency = currencySelect.value;
     const departureTotal = renderFlightDetails(departureFlights, departureFlightList, selectedCurrency);
     const returnTotal = renderFlightDetails(returnFlights, returnFlightList, selectedCurrency);
+    isPostBack = true;
     
     // Calculate total amount
     const totalAmount = departureTotal + returnTotal;
