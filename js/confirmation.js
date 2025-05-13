@@ -11,6 +11,14 @@ const currencySelect = document.getElementById('currencySelect');
 var selectedCurrencyToPay = "";
 var amountToPay = 0;
 
+// Function to format amount to be displayed
+function formatAmount(amountToBeFormatted){
+    let amountFormatted = amountToBeFormatted.toFixed(2);
+    amountFormatted = amountFormatted.replace('.', ',');
+    amountFormatted = amountFormatted.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return amountFormatted;
+}
+
 // Function to render flight details
 function renderFlightDetails(flights, container, currency) {
     container.innerHTML = "";
@@ -29,14 +37,11 @@ function renderFlightDetails(flights, container, currency) {
         if(currency === 'IDR'){
             price *= 3800; // Convert MYR to IDR    
         }
-        let totalAmountFormatted = price.toFixed(2);
-        totalAmountFormatted = totalAmountFormatted.replace('.', ',');
-        totalAmountFormatted = totalAmountFormatted.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
         flightInfo.innerHTML = `
         <div><strong>${flight.from} → ${flight.to}</strong></div>
         <div>Departure: ${flight.departureDate}</div>
-        <div>Price: ${currency} ${totalAmountFormatted}</div>
+        <div>Price: ${currency} ${formatAmount(price)}</div>
         `;
         container.appendChild(flightInfo);
         total += price; // Add to total
@@ -54,10 +59,7 @@ function updateTotalAmount() {
     
     // Calculate total amount
     const totalAmount = departureTotal + returnTotal;
-    let totalAmountFormatted = totalAmount.toFixed(2);
-    totalAmountFormatted = totalAmountFormatted.replace('.', ',');
-    totalAmountFormatted = totalAmountFormatted.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    totalAmountDiv.innerHTML = `Total Amount: <span class="bold">${selectedCurrency} ${totalAmountFormatted}</span>`;
+    totalAmountDiv.innerHTML = `Total Amount: <span class="bold">${selectedCurrency} ${formatAmount(totalAmount)}</span>`;
 
     amountToPay = totalAmount;
     selectedCurrencyToPay = selectedCurrency;
