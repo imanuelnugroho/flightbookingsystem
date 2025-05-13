@@ -13,6 +13,30 @@ let exchangeRateMyrToIdr = 3800;
 let selectedCurrencyToPay = "";
 let amountToPay = 0;
 
+const exchangeRateFromApi = async () => {
+    try {
+        const response = await fetch('https://api.currencyfreaks.com/latest?apikey=7253a8d8e6b842a092de0d1cffbacace&symbols=IDR&base=MYR');
+        const data = await response.json();
+        return data.rates.IDR; // Assuming the response structure contains rates
+    } catch (error) {
+        console.error('Error fetching exchange rate:', error);
+        return 3800; // Handle error appropriately
+    }
+};
+
+const updateExchangeRate = async () => {
+  const rate = await exchangeRateFromApi();
+  if (rate) {
+    console.log(`Current exchange rate from MYR to IDR: ${rate}`);
+    // You can now use this rate in your calculations
+    exchangeRateDiv.innerHTML = `Exchange Rate (MYR to IDR): <span class="bold">${formatAmount(rate)}</span>`;
+    exchangeRateMyrToIdr = rate;
+  } else {
+    console.log('Failed to retrieve exchange rate.');
+  }
+};
+
+
 // Function to format amount to be displayed
 function formatAmount(amountToBeFormatted){
     let amountFormatted = amountToBeFormatted.toFixed(2);
@@ -54,19 +78,7 @@ function renderFlightDetails(flights, container, currency) {
 // Function to update total amount display
 function updateTotalAmount() {
     // Get latest exchange rate
-    exchangeRateMyrToIdr = async () => {
-        const apiKey = 'xAqS85d6Flznf7LBWAt6pu6pCUumb0tK'; // Replace with your actual API key
-        const url = `https://api.polygon.io/v2/aggs/ticker/CURRENCY:MYRIDR/prev?apiKey=${apiKey}`;
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            return data.results[0].c; // Assuming the response structure contains the current rate in 'c'
-        } catch (error) {
-            console.log('Error fetching exchange rate:', error);
-            return 3800; // Handle error appropriately
-        }
-    };
-    exchangeRateDiv.innerHTML = `Exchange Rate (MYR to IDR): <span class="bold">${formatAmount(exchangeRateMyrToIdr)}</span>`;
+    updateExchangeRate();
 
     // Render selected flights
     const selectedCurrency = currencySelect.value;
