@@ -15,11 +15,11 @@ let amountToPay = 0;
 
 const exchangeRateFromApi = async () => {
     try {
-        const response = await fetch('https://api.currencyfreaks.com/latest?apikey=7253a8d8e6b842a092de0d1cffbacace&symbols=IDR&base=MYR');
+        const response = await fetch('https://api.currencyfreaks.com/v2.0/rates/latest?apikey=7253a8d8e6b842a092de0d1cffbacace&symbols=MYR,IDR&base=USD');
         const data = await response.json();
-        return data.rates.IDR; // Assuming the response structure contains rates
+        return data.rates.IDR / data.rates.MYR; // Assuming the response structure contains rates
     } catch (error) {
-        console.error('Error fetching exchange rate:', error);
+        console.log('Error fetching exchange rate:', error);
         return 3800; // Handle error appropriately
     }
 };
