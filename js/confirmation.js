@@ -6,10 +6,12 @@ const returnFlights = JSON.parse(urlParams.get('returnFlights') || '[]');
 const departureFlightList = document.getElementById('departureFlightList');
 const returnFlightList = document.getElementById('returnFlightList');
 const totalAmountDiv = document.getElementById('totalAmount');
+const exchangeRateDiv = document.getElementById('exchangeRate');
 const currencySelect = document.getElementById('currencySelect');
 
-var selectedCurrencyToPay = "";
-var amountToPay = 0;
+let exchangeRateMyrToIdr = 3800;
+let selectedCurrencyToPay = "";
+let amountToPay = 0;
 
 // Function to format amount to be displayed
 function formatAmount(amountToBeFormatted){
@@ -35,7 +37,7 @@ function renderFlightDetails(flights, container, currency) {
         // Convert price based on selected currency
         let price = flight.price; // Assume price is in MYR
         if(currency === 'IDR'){
-            price *= 3800; // Convert MYR to IDR    
+            price *= exchangeRateMyrToIdr; // Convert MYR to IDR    
         }
 
         flightInfo.innerHTML = `
@@ -52,6 +54,10 @@ function renderFlightDetails(flights, container, currency) {
 
 // Function to update total amount display
 function updateTotalAmount() {
+    // Get latest exchange rate
+    exchangeRateMyrToIdr = 3800;
+    exchangeRateDiv.innerHTML = `Exchange Rate (MYR to IDR): <span class="bold">${formatAmount(exchangeRateMyrToIdr)}</span>`;
+
     // Render selected flights
     const selectedCurrency = currencySelect.value;
     const departureTotal = renderFlightDetails(departureFlights, departureFlightList, selectedCurrency);
