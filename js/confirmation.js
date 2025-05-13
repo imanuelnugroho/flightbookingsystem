@@ -88,7 +88,7 @@ function updateTotalAmount() {
     
     // Calculate total amount
     const totalAmount = departureTotal + returnTotal;
-    totalAmountDiv.innerHTML = `Total Amount: <span class="bold">${selectedCurrency} ${formatAmount(totalAmount)}</span>`;
+    totalAmountDiv.innerHTML = `Total Amount (rounded and fixed): <span class="bold">${selectedCurrency} ${formatAmount(totalAmount)}</span>`;
 
     amountToPay = totalAmount;
     selectedCurrencyToPay = selectedCurrency;
@@ -103,9 +103,9 @@ currencySelect.addEventListener('change', updateTotalAmount);
 document.getElementById('payButton').addEventListener('click', () => {
     let paymentGatewayUrl = "";
     if(selectedCurrencyToPay === "IDR"){
-        paymentGatewayUrl = `https://indonesian-payment-gateway.co.id/pay?amount=${amountToPay}&currency=${selectedCurrencyToPay}`;
+        paymentGatewayUrl = `https://indonesian-payment-gateway.co.id/pay?amount=${amountToPay.toFixed(0)}&currency=${selectedCurrencyToPay}`;
     }else{
-        paymentGatewayUrl = `https://malaysian-payment-gateway.com.my/pay?amount=${amountToPay}&currency=${selectedCurrencyToPay}`;
+        paymentGatewayUrl = `https://malaysian-payment-gateway.com.my/pay?amount=${amountToPay.toFixed(0)}&currency=${selectedCurrencyToPay}`;
     }
 
     // Open the payment gateway in a new tab
