@@ -103,9 +103,9 @@ currencySelect.addEventListener('change', updateTotalAmount);
 document.getElementById('payButton').addEventListener('click', () => {
     let paymentGatewayUrl = "";
     if(selectedCurrencyToPay === "IDR"){
-        paymentGatewayUrl = `https://indonesian-payment-gateway.co.id/pay?amount=${Math.trunc(amountToPay)}&currency=${selectedCurrencyToPay}`;
+        paymentGatewayUrl = `https://indonesian-payment-gateway.co.id/pay?amount=${Math.ceil(amountToPay)}&currency=${selectedCurrencyToPay}`;
     }else{
-        paymentGatewayUrl = `https://malaysian-payment-gateway.com.my/pay?amount=${Math.trunc(amountToPay)}&currency=${selectedCurrencyToPay}`;
+        paymentGatewayUrl = `https://malaysian-payment-gateway.com.my/pay?amount=${Math.ceil(amountToPay)}&currency=${selectedCurrencyToPay}`;
     }
 
     // Open the payment gateway in a new tab
