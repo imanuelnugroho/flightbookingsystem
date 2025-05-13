@@ -7,9 +7,10 @@ const departureFlightList = document.getElementById('departureFlightList');
 const returnFlightList = document.getElementById('returnFlightList');
 const totalAmountDiv = document.getElementById('totalAmount');
 const currencySelect = document.getElementById('currencySelect');
-const selectedCurrencyToPay = "";
-const amountToPay = 0;
-const isPostBack = false;
+
+var selectedCurrencyToPay = "";
+var amountToPay = 0;
+var isPostBack = false;
 
 // Function to render flight details
 function renderFlightDetails(flights, container, currency) {
@@ -50,7 +51,6 @@ function updateTotalAmount() {
     const selectedCurrency = currencySelect.value;
     const departureTotal = renderFlightDetails(departureFlights, departureFlightList, selectedCurrency);
     const returnTotal = renderFlightDetails(returnFlights, returnFlightList, selectedCurrency);
-    isPostBack = true;
     
     // Calculate total amount
     const totalAmount = departureTotal + returnTotal;
@@ -58,6 +58,7 @@ function updateTotalAmount() {
 
     amountToPay = totalAmount;
     selectedCurrencyToPay = selectedCurrency;
+    isPostBack = true;
 }
 // Initial render of selected flights
 updateTotalAmount();
