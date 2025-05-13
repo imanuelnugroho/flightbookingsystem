@@ -40,7 +40,7 @@ const updateExchangeRate = async () => {
 
 // Function to format amount to be displayed
 function formatAmount(amountToBeFormatted){
-    let amountFormatted = amountToBeFormatted.toFixed(2);
+    let amountFormatted = Math.ceil(amountToBeFormatted);
     amountFormatted = amountFormatted.replace('.', ',');
     amountFormatted = amountFormatted.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     return amountFormatted;
@@ -103,9 +103,9 @@ currencySelect.addEventListener('change', updateTotalAmount);
 document.getElementById('payButton').addEventListener('click', () => {
     let paymentGatewayUrl = "";
     if(selectedCurrencyToPay === "IDR"){
-        paymentGatewayUrl = `https://indonesian-payment-gateway.co.id/pay?amount=${amountToPay.toFixed(0)}&currency=${selectedCurrencyToPay}`;
+        paymentGatewayUrl = `https://indonesian-payment-gateway.co.id/pay?amount=${Math.trunc(amountToPay)}&currency=${selectedCurrencyToPay}`;
     }else{
-        paymentGatewayUrl = `https://malaysian-payment-gateway.com.my/pay?amount=${amountToPay.toFixed(0)}&currency=${selectedCurrencyToPay}`;
+        paymentGatewayUrl = `https://malaysian-payment-gateway.com.my/pay?amount=${Math.trunc(amountToPay)}&currency=${selectedCurrencyToPay}`;
     }
 
     // Open the payment gateway in a new tab
