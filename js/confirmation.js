@@ -14,6 +14,8 @@ var isPostBack = false;
 
 // Function to render flight details
 function renderFlightDetails(flights, container, currency) {
+    container.innerHTML = "";
+    
     if (flights.length === 0) {
         container.innerHTML = '<p>No flights selected.</p>';
         return 0; // Return 0 if no flights
