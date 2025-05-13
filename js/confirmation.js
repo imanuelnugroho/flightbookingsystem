@@ -51,11 +51,21 @@ function renderFlightDetails(flights, container, currency) {
     return total; // Return total amount for this flight list
 }
 
-
 // Function to update total amount display
 function updateTotalAmount() {
     // Get latest exchange rate
-    exchangeRateMyrToIdr = 3800;
+    exchangeRateMyrToIdr = async () => {
+        const apiKey = 'xAqS85d6Flznf7LBWAt6pu6pCUumb0tK'; // Replace with your actual API key
+        const url = `https://api.polygon.io/v2/aggs/ticker/CURRENCY:MYRIDR/prev?apiKey=${apiKey}`;
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            return data.results[0].c; // Assuming the response structure contains the current rate in 'c'
+        } catch (error) {
+            console.log('Error fetching exchange rate:', error);
+            return 3800; // Handle error appropriately
+        }
+    };
     exchangeRateDiv.innerHTML = `Exchange Rate (MYR to IDR): <span class="bold">${formatAmount(exchangeRateMyrToIdr)}</span>`;
 
     // Render selected flights
