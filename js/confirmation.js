@@ -54,7 +54,10 @@ function updateTotalAmount() {
     
     // Calculate total amount
     const totalAmount = departureTotal + returnTotal;
-    totalAmountDiv.innerHTML = `Total Amount: <span class="bold">${selectedCurrency} ${totalAmount.toFixed(2)}</span>`;
+    let totalAmountFormatted = totalAmount.toFixed(2);
+    totalAmountFormatted = totalAmountFormatted.replace('.', ',');
+    totalAmountFormatted = totalAmountFormatted.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    totalAmountDiv.innerHTML = `Total Amount: <span class="bold">${selectedCurrency} ${totalAmountFormatted}</span>`;
 
     amountToPay = totalAmount;
     selectedCurrencyToPay = selectedCurrency;
