@@ -9,6 +9,7 @@ const totalAmountDiv = document.getElementById('totalAmount');
 const currencySelect = document.getElementById('currencySelect');
 const selectedCurrencyToPay = "";
 const amountToPay = 0;
+const isPostBack = false;
 
 // Function to render flight details
 function renderFlightDetails(flights, container, currency) {
@@ -23,10 +24,12 @@ function renderFlightDetails(flights, container, currency) {
         
         // Convert price based on selected currency
         let price = flight.price; // Assume price is in MYR
-        if (currency === 'IDR') {
-            price *= 3500; // Convert MYR to IDR
-        }else{
-            price /= 3500; // Convert IDR to MYR
+        if(isPostBack){
+            if (currency === 'IDR') {
+                price *= 3500; // Convert MYR to IDR    
+            }else{
+                price /= 3500; // Convert IDR to MYR
+            }
         }
 
         flightInfo.innerHTML = `
@@ -37,6 +40,7 @@ function renderFlightDetails(flights, container, currency) {
         container.appendChild(flightInfo);
         total += price; // Add to total
     });
+    isPostBack = true;
     return total; // Return total amount for this flight list
 }
 
