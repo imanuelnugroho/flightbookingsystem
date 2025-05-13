@@ -72,7 +72,7 @@ currencySelect.addEventListener('change', updateTotalAmount);
 
 // Payment button functionality
 document.getElementById('payButton').addEventListener('click', () => {
-    const paymentGatewayUrl = "";
+    let paymentGatewayUrl = "";
     if(selectedCurrencyToPay === "IDR"){
         paymentGatewayUrl = `https://indonesian-payment-gateway.co.id/pay?amount=${amountToPay}&currency=${selectedCurrencyToPay}`;
     }else{
