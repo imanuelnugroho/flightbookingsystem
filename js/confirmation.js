@@ -40,7 +40,7 @@ const updateExchangeRate = async () => {
 
 // Function to format amount to be displayed
 function formatAmount(amountToBeFormatted){
-    let amountFormatted = Math.ceil(amountToBeFormatted);
+    let amountFormatted = Math.ceil(amountToBeFormatted).toFixed(2);
     amountFormatted = amountFormatted.replace('.', ',');
     amountFormatted = amountFormatted.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     return amountFormatted;
