@@ -29,7 +29,8 @@ const updateExchangeRate = async () => {
   if (rate) {
     console.log(`Current exchange rate from MYR to IDR: ${rate}`);
     // You can now use this rate in your calculations
-    exchangeRateDiv.innerHTML = `Exchange Rate (MYR to IDR): <span class="bold">${formatAmount(rate)}</span>`;
+    exchangeRateDiv.innerHTML = `Exchange Rate (MYR to IDR): <span class="bold">${formatAmount(rate)}</span><br />
+                                 Source: <a href="https://currencyfreaks.com/">https://currencyfreaks.com/</a>`;
     exchangeRateMyrToIdr = rate;
   } else {
     console.log('Failed to retrieve exchange rate.');
