@@ -30,8 +30,6 @@ function renderFlightDetails(flights, container, currency) {
         if(isPostBack){
             if (currency === 'IDR') {
                 price *= 3500; // Convert MYR to IDR    
-            }else{
-                price /= 3500; // Convert IDR to MYR
             }
         }
 
