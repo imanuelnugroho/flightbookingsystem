@@ -121,3 +121,12 @@ button:hover, button:focus {
 .search-button:hover, .search-button:focus {
   background-color: #a10909;
 }
+
+.total-amount{
+  margin-top:15px;
+  margin-bottom:15px;
+}
+
+.bold{
+  font-weight:bold;
+}

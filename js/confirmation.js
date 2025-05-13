@@ -34,7 +34,7 @@ const returnTotal = renderFlightDetails(returnFlights, returnFlightList);
 
 // Calculate total amount
 const totalAmount = departureTotal + returnTotal;
-totalAmountDiv.innerHTML = `Total Amount: USD ${totalAmount.toFixed(2)}`;
+totalAmountDiv.innerHTML = 'Total Amount: <span class="bold">USD ${totalAmount.toFixed(2)}</span>';
 
 // Payment button functionality
 document.getElementById('payButton').addEventListener('click', () => {
