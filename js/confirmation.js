@@ -10,7 +10,6 @@ const currencySelect = document.getElementById('currencySelect');
 
 var selectedCurrencyToPay = "";
 var amountToPay = 0;
-var isPostBack = false;
 
 // Function to render flight details
 function renderFlightDetails(flights, container, currency) {
@@ -27,16 +26,17 @@ function renderFlightDetails(flights, container, currency) {
         
         // Convert price based on selected currency
         let price = flight.price; // Assume price is in MYR
-        if(isPostBack){
-            if (currency === 'IDR') {
-                price *= 3500; // Convert MYR to IDR    
-            }
+        if(currency === 'IDR'){
+            price *= 3800; // Convert MYR to IDR    
         }
+        let totalAmountFormatted = price.toFixed(2);
+        totalAmountFormatted = totalAmountFormatted.replace('.', ',');
+        totalAmountFormatted = totalAmountFormatted.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
         flightInfo.innerHTML = `
         <div><strong>${flight.from} → ${flight.to}</strong></div>
         <div>Departure: ${flight.departureDate}</div>
-        <div>Price: ${currency} ${price.toFixed(2)}</div>
+        <div>Price: ${currency} ${totalAmountFormatted}</div>
         `;
         container.appendChild(flightInfo);
         total += price; // Add to total
@@ -58,7 +58,6 @@ function updateTotalAmount() {
 
     amountToPay = totalAmount;
     selectedCurrencyToPay = selectedCurrency;
-    isPostBack = true;
 }
 // Initial render of selected flights
 updateTotalAmount();
@@ -68,13 +67,11 @@ currencySelect.addEventListener('change', updateTotalAmount);
 
 // Payment button functionality
 document.getElementById('payButton').addEventListener('click', () => {
-    const totalAmountFormatted = amountToPay.toFixed(2);
     const paymentGatewayUrl = "";
-    
-    if(currencySelect === "IDR"){
-        paymentGatewayUrl = `https://indonesian-payment-gateway.co.id/pay?amount=${totalAmountFormatted}&currency=${selectedCurrencyToPay}`;
+    if(selectedCurrencyToPay === "IDR"){
+        paymentGatewayUrl = `https://indonesian-payment-gateway.co.id/pay?amount=${amountToPay}&currency=${selectedCurrencyToPay}`;
     }else{
-        paymentGatewayUrl = `https://malaysian-payment-gateway.com.my/pay?amount=${totalAmountFormatted}&currency=${selectedCurrencyToPay}`;
+        paymentGatewayUrl = `https://malaysian-payment-gateway.com.my/pay?amount=${amountToPay}&currency=${selectedCurrencyToPay}`;
     }
 
     // Open the payment gateway in a new tab
