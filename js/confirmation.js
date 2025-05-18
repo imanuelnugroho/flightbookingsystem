@@ -112,3 +112,39 @@ document.getElementById('payButton').addEventListener('click', () => {
     // window.open(paymentGatewayUrl, '_blank');
     alert('Proceeding to payment: ' + paymentGatewayUrl);
 });
+
+
+/*
+// confirmation.js
+
+// Include Stripe.js
+const stripe = require('stripe')('your_stripe_secret_key');
+
+// Function to handle payment
+async function handlePayment(amount, currency) {
+    try {
+        // Create a payment intent
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: amount, // Amount in cents
+            currency: currency,
+            // Optionally, you can add more parameters like payment_method_types
+        });
+
+        console.log('Payment Intent created:', paymentIntent);
+        // Handle the payment confirmation here
+        // e.g., redirect to a success page or show a success message
+    } catch (error) {
+        console.error('Error creating payment intent:', error);
+        // Handle error (e.g., show an error message to the user)
+    }
+}
+
+// Example usage
+document.getElementById('paymentButton').addEventListener('click', () => {
+    const amount = 5000; // Amount in cents (e.g., $50.00)
+    const currency = 'my'; // Currency code for Malaysia
+    handlePayment(amount, currency);
+});
+
+
+*/
