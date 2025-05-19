@@ -102,20 +102,41 @@ currencySelect.addEventListener('change', updateTotalAmount);
 // Include Stripe.js
 
 // Function to handle payment
-async function handlePayment(amount, currency, secretkey) {
+async function handlePayment(amount, currency, secretkey, fullname, email) {
     let stripe = Stripe(secretkey);
-    
-    try {
-        // Create a payment intent
-        const paymentIntent = await stripe.paymentIntents.create({
-            amount: amount, // Amount in cents
-            currency: currency,
-            // Optionally, you can add more parameters like payment_method_types
-        });
+    var elements = stripe.elements({
+        mode: 'payment',
+        currency: currency,
+        amount: amount
+    });
 
-        console.log('Payment Intent created:', paymentIntent);
+    try {
+        // // Create a payment intent
+        // const paymentIntent = await stripe.paymentIntents.create({
+        //     amount: amount, // Amount in cents
+        //     currency: currency,
+        //     // Optionally, you can add more parameters like payment_method_types
+        // });
+
+        // console.log('Payment Intent created:', paymentIntent);
         // Handle the payment confirmation here
         // e.g., redirect to a success page or show a success message
+        stripe.confirmPayment({
+            elements,
+            confirmParams: {
+                return_url: 'https://imanuelnugroho.github.io/flightbookingsystem/index.html',
+                payment_method_data: {
+                    billing_details: {
+                        name: fullname,
+                        email: email,
+                }},
+            },
+        }).then(function(result) {
+            if (result.error) {
+                // Inform the customer that there was an error.
+                console.log('Error creating payment intent:', result.error);
+            }
+        });
     } catch (error) {
         console.log('Error creating payment intent:', error);
         // Handle error (e.g., show an error message to the user)
@@ -136,12 +157,12 @@ document.getElementById('payButton').addEventListener('click', () => {
     // alert('Proceeding to payment: ' + paymentGatewayUrl);
     let amount = Math.ceil(amountToPay);
     let currency = selectedCurrencyToPay;
-    // let fullName = document.getElementById('fullName').value;
+    let fullName = document.getElementById('fullName').value;
     // let phoneNumber = document.getElementById('phoneNumber').value;
-    // let email = document.getElementById('email').value;
+    let email = document.getElementById('email').value;
     let secretkey = document.getElementById('apiKey').value;
 
-    handlePayment(amount, currency, secretkey);
+    handlePayment(amount, currency, secretkey, fullname, email);
 });
 
 
