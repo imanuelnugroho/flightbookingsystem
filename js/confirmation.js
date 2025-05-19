@@ -136,7 +136,11 @@ document.getElementById('payButton').addEventListener('click', () => {
     // alert('Proceeding to payment: ' + paymentGatewayUrl);
     let amount = Math.ceil(amountToPay);
     let currency = selectedCurrencyToPay;
-    let secretkey = '';
+    // let fullName = document.getElementById('fullName').value;
+    // let phoneNumber = document.getElementById('phoneNumber').value;
+    // let email = document.getElementById('email').value;
+    let secretkey = document.getElementById('apiKey').value;
+
     handlePayment(amount, currency, secretkey);
 });
 
