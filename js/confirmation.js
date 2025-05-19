@@ -103,8 +103,8 @@ currencySelect.addEventListener('change', updateTotalAmount);
 
 // Function to handle payment
 async function handlePayment(amount, currency, secretkey) {
-    let stripe = require('stripe')(secretkey);
-
+    let stripe = Stripe(secretkey);
+    
     try {
         // Create a payment intent
         const paymentIntent = await stripe.paymentIntents.create({
