@@ -106,7 +106,7 @@ async function handlePayment(amount, currency, secretkey, fullname, email) {
     let stripe = Stripe(secretkey);
     var elements = stripe.elements({
         mode: 'payment',
-        currency: currency,
+        currency: currency.toLowerCase(),
         amount: amount
     });
 
