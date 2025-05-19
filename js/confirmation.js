@@ -99,49 +99,79 @@ updateTotalAmount();
 // Event listener for currency selection change
 currencySelect.addEventListener('change', updateTotalAmount);
 
-// Include Stripe.js
+// // Function to handle payment
+// async function handlePayment(amount, currency, secretkey, fullname, email) {
+//     let stripe = Stripe(secretkey);
+//     let elements = stripe.elements({
+//         mode: 'payment',
+//         currency: currency.toLowerCase(),
+//         amount: amount
+//     });
+//     let cardElement = elements.create('card');
+//     cardElement.mount('#cardElement');
 
-// Function to handle payment
-async function handlePayment(amount, currency, secretkey, fullname, email) {
-    let stripe = Stripe(secretkey);
-    var elements = stripe.elements({
-        mode: 'payment',
-        currency: currency.toLowerCase(),
-        amount: amount
-    });
+//     try {
+//         // // Create a payment intent
+//         // const paymentIntent = await stripe.paymentIntents.create({
+//         //     amount: amount, // Amount in cents
+//         //     currency: currency,
+//         //     // Optionally, you can add more parameters like payment_method_types
+//         // });
 
-    try {
-        // // Create a payment intent
-        // const paymentIntent = await stripe.paymentIntents.create({
-        //     amount: amount, // Amount in cents
-        //     currency: currency,
-        //     // Optionally, you can add more parameters like payment_method_types
-        // });
+//         // console.log('Payment Intent created:', paymentIntent);
+//         // Handle the payment confirmation here
+//         // e.g., redirect to a success page or show a success message
 
-        // console.log('Payment Intent created:', paymentIntent);
-        // Handle the payment confirmation here
-        // e.g., redirect to a success page or show a success message
-        stripe.confirmPayment({
-            elements,
-            confirmParams: {
-                return_url: 'https://imanuelnugroho.github.io/flightbookingsystem/index.html',
-                payment_method_data: {
-                    billing_details: {
-                        name: fullname,
-                        email: email,
-                }},
-            },
-        }).then(function(result) {
-            if (result.error) {
-                // Inform the customer that there was an error.
-                console.log('Error creating payment intent:', result.error);
-            }
-        });
-    } catch (error) {
-        console.log('Error creating payment intent:', error);
-        // Handle error (e.g., show an error message to the user)
-    }
-}
+
+
+
+
+//         // stripe.confirmPayment({
+//         //     elements,
+//         //     confirmParams: {
+//         //         return_url: 'https://imanuelnugroho.github.io/flightbookingsystem/index.html',
+//         //         payment_method_data: {
+//         //             billing_details: {
+//         //                 name: fullname,
+//         //                 email: email,
+//         //         }},
+//         //     },
+//         // }).then(function(result) {
+//         //     if (result.error) {
+//         //         // Inform the customer that there was an error.
+//         //         console.log('Error creating payment intent:', result.error);
+//         //     }
+//         // });
+
+
+
+//         // Create a Checkout Session
+//         const response = await fetch('https://your-server-endpoint/create-checkout-session', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify({
+//                 fullName,
+//                 phoneNumber,
+//                 email,
+//                 // Add any other necessary data
+//             }),
+//         });
+//         const sessionId = await response.json();
+        
+//             // Redirect to Checkout
+//             const { error } = await stripe.redirectToCheckout({ sessionId });
+//             if (error) {
+//                 console.error('Error:', error);
+//                 alert('Error redirecting to checkout. Please try again.');
+//             }
+
+//     } catch (error) {
+//         console.log('Error creating payment intent:', error);
+//         // Handle error (e.g., show an error message to the user)
+//     }
+// }
 
 // Payment button functionality
 document.getElementById('payButton').addEventListener('click', () => {
@@ -155,14 +185,19 @@ document.getElementById('payButton').addEventListener('click', () => {
     // // Open the payment gateway in a new tab
     // // window.open(paymentGatewayUrl, '_blank');
     // alert('Proceeding to payment: ' + paymentGatewayUrl);
-    let amount = Math.ceil(amountToPay);
-    let currency = selectedCurrencyToPay;
-    let fullname = document.getElementById('fullName').value;
-    // let phoneNumber = document.getElementById('phoneNumber').value;
-    let email = document.getElementById('email').value;
-    let secretkey = document.getElementById('apiKey').value;
 
-    handlePayment(amount, currency, secretkey, fullname, email);
+    // let amount = Math.ceil(amountToPay);
+    // let currency = selectedCurrencyToPay;
+    // let fullname = document.getElementById('fullName').value;
+    // let phonenumber = document.getElementById('phoneNumber').value;
+    // let email = document.getElementById('email').value;
+    // let secretkey = document.getElementById('apiKey').value;
+    // handlePayment(amount, currency, secretkey, fullname, email);
+    if(selectedCurrencyToPay === "IDR"){
+        window.location.href = 'https://buy.stripe.com/test_6oU9AV0ug1yk776b2mcMM01';
+    }else{
+        window.location.href = 'https://buy.stripe.com/test_14AaEZdh2gteezy1rMcMM00';
+    }
 });
 
 
