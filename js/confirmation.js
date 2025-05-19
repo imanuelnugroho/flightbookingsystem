@@ -99,29 +99,12 @@ updateTotalAmount();
 // Event listener for currency selection change
 currencySelect.addEventListener('change', updateTotalAmount);
 
-// Payment button functionality
-document.getElementById('payButton').addEventListener('click', () => {
-    let paymentGatewayUrl = "";
-    if(selectedCurrencyToPay === "IDR"){
-        paymentGatewayUrl = `https://indonesian-payment-gateway.co.id/pay?amount=${Math.ceil(amountToPay)}&currency=${selectedCurrencyToPay}`;
-    }else{
-        paymentGatewayUrl = `https://malaysian-payment-gateway.com.my/pay?amount=${Math.ceil(amountToPay)}&currency=${selectedCurrencyToPay}`;
-    }
-
-    // Open the payment gateway in a new tab
-    // window.open(paymentGatewayUrl, '_blank');
-    alert('Proceeding to payment: ' + paymentGatewayUrl);
-});
-
-
-/*
-// confirmation.js
-
 // Include Stripe.js
-const stripe = require('stripe')('your_stripe_secret_key');
 
 // Function to handle payment
-async function handlePayment(amount, currency) {
+async function handlePayment(amount, currency, secretkey) {
+    let stripe = require('stripe')(secretkey);
+
     try {
         // Create a payment intent
         const paymentIntent = await stripe.paymentIntents.create({
@@ -134,10 +117,34 @@ async function handlePayment(amount, currency) {
         // Handle the payment confirmation here
         // e.g., redirect to a success page or show a success message
     } catch (error) {
-        console.error('Error creating payment intent:', error);
+        console.log('Error creating payment intent:', error);
         // Handle error (e.g., show an error message to the user)
     }
 }
+
+// Payment button functionality
+document.getElementById('payButton').addEventListener('click', () => {
+    // let paymentGatewayUrl = "";
+    // if(selectedCurrencyToPay === "IDR"){
+    //     paymentGatewayUrl = `https://indonesian-payment-gateway.co.id/pay?amount=${Math.ceil(amountToPay)}&currency=${selectedCurrencyToPay}`;
+    // }else{
+    //     paymentGatewayUrl = `https://malaysian-payment-gateway.com.my/pay?amount=${Math.ceil(amountToPay)}&currency=${selectedCurrencyToPay}`;
+    // }
+
+    // // Open the payment gateway in a new tab
+    // // window.open(paymentGatewayUrl, '_blank');
+    // alert('Proceeding to payment: ' + paymentGatewayUrl);
+    let amount = Math.ceil(amountToPay);
+    let currency = selectedCurrencyToPay;
+    let secretkey = '';
+    handlePayment(amount, currency, secretkey);
+});
+
+
+/*
+// confirmation.js
+
+
 
 // Example usage
 document.getElementById('paymentButton').addEventListener('click', () => {
