@@ -1,2 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+/* @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css'); */
+
+*{
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff;
+  color: #111;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+header {
+  background-color: #d41111;
+  color: white;
+  padding: 10px 15px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgb(0 0 0 / 0.15);
+}
+
+/* Footer */
+footer  {
+  background-color: #262626;
+  color: #ddd;
+  padding: 15px;
+  text-align: center;
+  font-size: 0.9rem;
+  user-select: none;
+}

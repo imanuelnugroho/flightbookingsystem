@@ -1,4 +1,4 @@
-body {
+:host-context(body){
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #fff;
@@ -12,7 +12,7 @@ body {
   max-height: 600px;
   overflow-y: auto;
 }
-header {
+:host-context(header) {
   background-color: #d41111;
   color: white;
   padding: 20px 15px;
@@ -24,7 +24,7 @@ header {
   letter-spacing: 2px;
   user-select: none;
 }
-h2 {
+:host-context(h2)  {
   color: #d41111;
   font-weight: 900;
   margin-bottom: 15px;
@@ -32,18 +32,18 @@ h2 {
 .filter-section {
   margin-bottom: 25px;
 }
-label {
+:host-context(label)  {
   font-weight: 700;
   margin-right: 8px;
 }
-select {
+:host-context(select)  {
   padding: 5px 8px;
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 1rem;
   min-width: 130px;
 }
-button {
+:host-context(button)  {
   background-color: #d41111;
   color: white;
   border: none;
@@ -53,7 +53,7 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-button:hover, button:focus {
+:host-context(button):hover, :host-context(button):focus {
   background-color: #a10909;
 }
 .flights-list {
