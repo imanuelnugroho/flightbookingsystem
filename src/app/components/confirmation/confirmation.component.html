@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="../../../assets/css/confirmation.component.css" />
+
+<header role="banner" aria-label="Flight Confirmation">
+  Flight Confirmation
+</header>
+
+<a href="../index.html" class="back-link" aria-label="Back to home">← Back to Home</a>
+
+<div id="flightSummary" class="flight-summary">
+  <h2>Your Selected Flights</h2>
+  <h3>Departure Flights</h3>
+  <div id="departureFlightList"></div>
+  <h3>Return Flights</h3>
+  <div id="returnFlightList"></div>
+
+  <h3>Total Amount</h3>
+  <div id="totalAmount" class="total-amount"></div>
+  <h3>Exchange Rate</h3>
+  <div id="exchangeRate" class="total-amount"></div>
+
+  <label for="currencySelect">Select Currency:</label>
+  <select id="currencySelect">
+      <option value="MYR">Malaysian Ringgit (MYR)</option>
+      <option value="IDR">Indonesian Rupiah (IDR)</option>
+  </select>
+
+  <!-- <div class="form-group">
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" name="fullName" required />
+  </div>
+  <div class="form-group">
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="tel" id="phoneNumber" name="phoneNumber" required />
+  </div>
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required />
+  </div>
+  <div class="form-group">
+    <label for="apiKey">Stripe API Key:</label>
+    <input type="text" id="apiKey" name="apiKey" required />
+  </div> -->
+
+  <div>&nbsp;</div>
+
+</div>
+
+<button id="payButton" class="search-button" aria-label="Proceed to Payment">Proceed to Payment</button>
+
+<h2>&nbsp;</h2>
+
+<script src="../js/confirmation.js"></script>

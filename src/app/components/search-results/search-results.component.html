@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="../../../assets/css/search-results.component.css" />
+
+<header role="banner" aria-label="ManAviation Flight Search Results">
+  ManAviation Flight Search Results
+</header>
+
+<a href="../index.html" class="back-link" aria-label="Back to home">← Back to Home</a>
+
+<div class="filter-section" role="region" aria-label="Filter flight results">
+  <label for="filterStops">Filter by Stops:</label>
+  <select id="filterStops" aria-controls="flightsList">
+    <option value="all" selected>All</option>
+    <option value="nonstop">Nonstop</option>
+    <option value="1stop">1 Stop</option>
+    <option value="2plus">2+ Stops</option>
+  </select>
+</div>
+
+<h2>Departure Flights</h2>
+<section id="departureFlights" class="flights-list" role="list" aria-live="polite" aria-busy="false">
+  <!-- Departure flight cards will be dynamically added here -->
+</section>
+<div>&nbsp;</div>
+
+<h2>Return Flights</h2>
+<section id="returnFlights" class="flights-list" role="list" aria-live="polite" aria-busy="false">
+  <!-- Return flight cards will be dynamically added here -->
+</section>
+
+<h2>Confirmation</h2>
+<div class="confirm-section">
+  <button id="confirmSelection" class="search-button full-width" aria-label="Confirm Selected Flights">Confirm Selection</button>
+</div>
+
+<h2>&nbsp;</h2>
+
+<script src="../js/search-results.js"></script>
