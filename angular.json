@@ -27,10 +27,10 @@
               }
             ],
             "styles": [
-              "src/assets/css/styles.css",
-              "src/assets/css/confirmation.component.css",
-              "src/assets/css/flight-search.component.css",
-              "src/assets/css/search-results.component.css"
+              "./src/assets/css/styles.css",
+              "./src/assets/css/confirmation.component.css",
+              "./src/assets/css/flight-search.component.css",
+              "./src/assets/css/search-results.component.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
