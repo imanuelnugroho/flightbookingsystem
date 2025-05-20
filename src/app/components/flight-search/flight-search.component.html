@@ -1,171 +1,173 @@
 <link rel="stylesheet" href="../../../assets/css/flight-search.component.css" />
 
-<header>
-  <div class="container navbar" role="banner">
-    <div class="logo" aria-label="ManAviation logo" tabindex="0">ManAviation</div>
-    <nav aria-label="Primary navigation">
-      <a href="#" tabindex="0">Flights</a>
-      <a href="#" tabindex="0">Hotels</a>
-      <a href="#" tabindex="0">Experience</a>
-      <a href="#" tabindex="0">Deals</a>
-      <a href="#" tabindex="0">Manage</a>
-      <a href="#" tabindex="0">Support</a>
-    </nav>
-    <div class="nav-icons" aria-label="User  actions">
-      <span id="userPanel" class="user-panel" style="display:none;">
-        <span id="userName"></span>
-        <span id="userRole"></span>
-        <button id="logoutBtn" aria-label="Logout">Log out</button>
-      </span>
-      <span id="loginIcon" role="button" tabindex="0" aria-label="Login" title="Login">&#128100;</span>
-      <span role="button" tabindex="0" aria-label="Shopping cart" title="Shopping cart">&#128722;</span>
-    </div>
-  </div>
-</header>
-
-<main role="main">
-  <section class="hero" aria-label="Flight search and promotions">
-    <div class="hero-overlay" role="region" aria-live="polite" aria-atomic="true">
-      <h1>Book Your Flight</h1>
-      <p>Explore our low fares to over 165 destinations worldwide</p>
-      <form class="search-form" role="search" aria-label="Flight search form" id="flightSearchForm">
-        <div class="form-group">
-          <label for="fromAirport">From</label>
-          <select id="fromAirport" name="fromAirport" required aria-required="true">
-            <option value="" disabled selected>Select city</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="toAirport">To</label>
-          <select id="toAirport" name="toAirport" required aria-required="true">
-            <option value="" disabled selected>Select city</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="departDate">Departure</label>
-          <input type="date" id="departDate" name="departDate" required aria-required="true" />
-        </div>
-        <div class="form-group">
-          <label for="returnDate">Return</label>
-          <input type="date" id="returnDate" name="returnDate" />
-        </div>
-        <div class="form-group">
-          <label for="passengers">Passengers</label>
-          <select id="passengers" name="passengers" required aria-required="true">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-          </select>
-        </div>
-        <button class="search-button" type="submit" aria-label="Search flights">Search</button>
-      </form>
-      <div id="approvalPanel" class="admin-approval-panel" style="display:none;">
-        <h3>Pending User Approvals</h3>
-        <table aria-label="User approval requests">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="approvalRequestsTableBody">
-          </tbody>
-        </table>
+<main>
+  <header>
+    <div class="container navbar" role="banner">
+      <div class="logo" aria-label="ManAviation logo" tabindex="0">ManAviation</div>
+      <nav aria-label="Primary navigation">
+        <a href="#" tabindex="0">Flights</a>
+        <a href="#" tabindex="0">Hotels</a>
+        <a href="#" tabindex="0">Experience</a>
+        <a href="#" tabindex="0">Deals</a>
+        <a href="#" tabindex="0">Manage</a>
+        <a href="#" tabindex="0">Support</a>
+      </nav>
+      <div class="nav-icons" aria-label="User  actions">
+        <span id="userPanel" class="user-panel" style="display:none;">
+          <span id="userName"></span>
+          <span id="userRole"></span>
+          <button id="logoutBtn" aria-label="Logout">Log out</button>
+        </span>
+        <span id="loginIcon" role="button" tabindex="0" aria-label="Login" title="Login">&#128100;</span>
+        <span role="button" tabindex="0" aria-label="Shopping cart" title="Shopping cart">&#128722;</span>
       </div>
     </div>
-  </section>
+  </header>
 
-  <section class="promotions" aria-label="Promotions and featured destinations">
-    <h2>Featured Promotions</h2>
-    <div class="promo-cards">
-      <article class="promo-card" tabindex="0" aria-labelledby="promo-title-1" role="region">
-        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=60" alt="Beach Promotion" loading="lazy" />
-        <div class="promo-card-content">
-          <h3 id="promo-title-1">Beach Getaway Specials</h3>
-          <p>Enjoy exclusive discounts on tropical beach destinations.</p>
-          <button aria-label="Book Beach Getaway Specials">Book Now</button>
+  <main role="main">
+    <section class="hero" aria-label="Flight search and promotions">
+      <div class="hero-overlay" role="region" aria-live="polite" aria-atomic="true">
+        <h1>Book Your Flight</h1>
+        <p>Explore our low fares to over 165 destinations worldwide</p>
+        <form class="search-form" role="search" aria-label="Flight search form" id="flightSearchForm">
+          <div class="form-group">
+            <label for="fromAirport">From</label>
+            <select id="fromAirport" name="fromAirport" required aria-required="true">
+              <option value="" disabled selected>Select city</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="toAirport">To</label>
+            <select id="toAirport" name="toAirport" required aria-required="true">
+              <option value="" disabled selected>Select city</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="departDate">Departure</label>
+            <input type="date" id="departDate" name="departDate" required aria-required="true" />
+          </div>
+          <div class="form-group">
+            <label for="returnDate">Return</label>
+            <input type="date" id="returnDate" name="returnDate" />
+          </div>
+          <div class="form-group">
+            <label for="passengers">Passengers</label>
+            <select id="passengers" name="passengers" required aria-required="true">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
+          <button class="search-button" type="submit" aria-label="Search flights">Search</button>
+        </form>
+        <div id="approvalPanel" class="admin-approval-panel" style="display:none;">
+          <h3>Pending User Approvals</h3>
+          <table aria-label="User approval requests">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="approvalRequestsTableBody">
+            </tbody>
+          </table>
         </div>
-      </article>
-      <article class="promo-card" tabindex="0" aria-labelledby="promo-title-2" role="region">
-        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=60" alt="City Promotion" loading="lazy" />
-        <div class="promo-card-content">
-          <h3 id="promo-title-2">City Tours Offers</h3>
-          <p>Explore vibrant cities at unbeatable prices this season.</p>
-          <button aria-label="Book City Tours Offers">Book Now</button>
-        </div>
-      </article>
-      <article class="promo-card" tabindex="0" aria-labelledby="promo-title-3" role="region">
-        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=600&q=60" alt="Mountain Promotion" loading="lazy" />
-        <div class="promo-card-content">
-          <h3 id="promo-title-3">Mountain Adventure Deals</h3>
-          <p>Discover breathtaking mountain escapes and great savings.</p>
-          <button aria-label="Book Mountain Adventure Deals">Book Now</button>
-        </div>
-      </article>
-      <article class="promo-card" tabindex="0" aria-labelledby="promo-title-4" role="region">
-        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=600&q=60" alt="Mountain Promotion" loading="lazy" />
-        <div class="promo-card-content">
-          <h3 id="promo-title-4">Any Adventure Deals</h3>
-          <p>Discover breathtaking mountain escapes and great savings.</p>
-          <button aria-label="Book Mountain Adventure Deals">Book Now</button>
-        </div>
-      </article>
-      <article class="promo-card" tabindex="0" aria-labelledby="promo-title-5" role="region">
-        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=60" alt="Beach Promotion" loading="lazy" />
-        <div class="promo-card-content">
-          <h3 id="promo-title-5">Any Getaway Specials</h3>
-          <p>Enjoy exclusive discounts on tropical beach destinations.</p>
-          <button aria-label="Book Beach Getaway Specials">Book Now</button>
-        </div>
-      </article>
-    </div>
-  </section>
-</main>
+      </div>
+    </section>
 
-<footer role="contentinfo">
-  &copy; 2020 ManAviation. All rights reserved.
-</footer>
+    <section class="promotions" aria-label="Promotions and featured destinations">
+      <h2>Featured Promotions</h2>
+      <div class="promo-cards">
+        <article class="promo-card" tabindex="0" aria-labelledby="promo-title-1" role="region">
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=60" alt="Beach Promotion" loading="lazy" />
+          <div class="promo-card-content">
+            <h3 id="promo-title-1">Beach Getaway Specials</h3>
+            <p>Enjoy exclusive discounts on tropical beach destinations.</p>
+            <button aria-label="Book Beach Getaway Specials">Book Now</button>
+          </div>
+        </article>
+        <article class="promo-card" tabindex="0" aria-labelledby="promo-title-2" role="region">
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=60" alt="City Promotion" loading="lazy" />
+          <div class="promo-card-content">
+            <h3 id="promo-title-2">City Tours Offers</h3>
+            <p>Explore vibrant cities at unbeatable prices this season.</p>
+            <button aria-label="Book City Tours Offers">Book Now</button>
+          </div>
+        </article>
+        <article class="promo-card" tabindex="0" aria-labelledby="promo-title-3" role="region">
+          <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=600&q=60" alt="Mountain Promotion" loading="lazy" />
+          <div class="promo-card-content">
+            <h3 id="promo-title-3">Mountain Adventure Deals</h3>
+            <p>Discover breathtaking mountain escapes and great savings.</p>
+            <button aria-label="Book Mountain Adventure Deals">Book Now</button>
+          </div>
+        </article>
+        <article class="promo-card" tabindex="0" aria-labelledby="promo-title-4" role="region">
+          <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=600&q=60" alt="Mountain Promotion" loading="lazy" />
+          <div class="promo-card-content">
+            <h3 id="promo-title-4">Any Adventure Deals</h3>
+            <p>Discover breathtaking mountain escapes and great savings.</p>
+            <button aria-label="Book Mountain Adventure Deals">Book Now</button>
+          </div>
+        </article>
+        <article class="promo-card" tabindex="0" aria-labelledby="promo-title-5" role="region">
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=60" alt="Beach Promotion" loading="lazy" />
+          <div class="promo-card-content">
+            <h3 id="promo-title-5">Any Getaway Specials</h3>
+            <p>Enjoy exclusive discounts on tropical beach destinations.</p>
+            <button aria-label="Book Beach Getaway Specials">Book Now</button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
 
-<!-- Login/Register Modal -->
-<div id="modalBackdrop" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
-  <div class="modal" role="document">
-    <button class="close-btn" aria-label="Close modal" id="modalCloseBtn">&times;</button>
-    <div id="loginForm" style="display: none;">
-      <h2>Login</h2>
-      <form id="loginFormElement">
-        <label for="loginEmail">Email</label>
-        <input type="email" id="loginEmail" name="loginEmail" required autocomplete="username" />
-        <label for="loginPassword">Password</label>
-        <input type="password" id="loginPassword" name="loginPassword" required autocomplete="current-password" />
-        <button type="submit" class="submit-btn">Log In</button>
-      </form>
-      <div class="switch-link" id="showRegister">New user? Register here</div>
-    </div>
-    <div id="registerForm" style="display: none;">
-      <h2>Register</h2>
-      <form id="registerFormElement">
-        <label for="regName">Full Name</label>
-        <input type="text" id="regName" name="regName" required autocomplete="name" />
-        <label for="regEmail">Email</label>
-        <input type="email" id="regEmail" name="regEmail" required autocomplete="email" />
-        <label for="regPassword">Password</label>
-        <input type="password" id="regPassword" name="regPassword" required autocomplete="new-password" />
-        <label for="regRole">Register as</label>
-        <select id="regRole" name="regRole" required>
-          <option value="customer" selected>Customer</option>
-          <option value="affiliate">Affiliate</option>
-        </select>
-        <button type="submit" class="submit-btn">Register</button>
-      </form>
-      <div class="switch-link" id="showLogin">Already have an account? Login here</div>
+  <footer role="contentinfo">
+    &copy; 2020 ManAviation. All rights reserved.
+  </footer>
+
+  <!-- Login/Register Modal -->
+  <div id="modalBackdrop" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal" role="document">
+      <button class="close-btn" aria-label="Close modal" id="modalCloseBtn">&times;</button>
+      <div id="loginForm" style="display: none;">
+        <h2>Login</h2>
+        <form id="loginFormElement">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" name="loginEmail" required autocomplete="username" />
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" name="loginPassword" required autocomplete="current-password" />
+          <button type="submit" class="submit-btn">Log In</button>
+        </form>
+        <div class="switch-link" id="showRegister">New user? Register here</div>
+      </div>
+      <div id="registerForm" style="display: none;">
+        <h2>Register</h2>
+        <form id="registerFormElement">
+          <label for="regName">Full Name</label>
+          <input type="text" id="regName" name="regName" required autocomplete="name" />
+          <label for="regEmail">Email</label>
+          <input type="email" id="regEmail" name="regEmail" required autocomplete="email" />
+          <label for="regPassword">Password</label>
+          <input type="password" id="regPassword" name="regPassword" required autocomplete="new-password" />
+          <label for="regRole">Register as</label>
+          <select id="regRole" name="regRole" required>
+            <option value="customer" selected>Customer</option>
+            <option value="affiliate">Affiliate</option>
+          </select>
+          <button type="submit" class="submit-btn">Register</button>
+        </form>
+        <div class="switch-link" id="showLogin">Already have an account? Login here</div>
+      </div>
     </div>
   </div>
-</div>
+</main>
 
 <script src="js/app.js"></script>
