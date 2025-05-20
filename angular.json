@@ -27,7 +27,8 @@
               }
             ],
             "styles": [
-              "./src/assets/css/styles.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./src/styles.css",
               "./src/assets/css/confirmation.component.css",
               "./src/assets/css/flight-search.component.css",
               "./src/assets/css/search-results.component.css"
@@ -57,7 +58,14 @@
               "outputHashing": "all"
             },
             "development": {
-              "optimization": false,
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": false
+                },
+                "fonts": true
+              },
               "extractLicenses": false,
               "sourceMap": true
             }
@@ -95,7 +103,7 @@
             ],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "./src/assets/css/styles.css"
+              "./src/styles.css"
             ],
             "scripts": [
               "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
