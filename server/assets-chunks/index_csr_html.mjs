@@ -10,7 +10,7 @@ export default `<!doctype html>
   <script src="https://js.stripe.com/v3/"></script>
   <link rel="stylesheet" href="./styles.css">
 
-<link rel="stylesheet" href="styles-5INURTSO.css"></head>
+<style>*{box-sizing:border-box}body{margin:0;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;background:#fff;color:#111;overflow-x:hidden}body{font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;background:#fff;color:#111;overflow-x:hidden;max-width:600px;margin:0 auto;padding:10px 15px;-webkit-user-select:none;user-select:none;max-height:600px;overflow-y:auto}</style><link rel="stylesheet" href="styles-5FU7SEP7.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles-5FU7SEP7.css"></noscript></head>
 <body ngcm="">
   <app-root></app-root>
 <script src="polyfills-FFHMD2TL.js" type="module"></script><script src="main-WVESFZYD.js" type="module"></script></body>
