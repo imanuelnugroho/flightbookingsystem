@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: '../../../assets/css/flight-search.component.css'
 })
 export class FlightSearchComponent {
-  
+  // myScriptElement: HTMLScriptElement | undefined;
+  // constructor(){
+  //   this.myScriptElement = document.createElement("script");
+  //   this.myScriptElement.src = "../../../assets/js/flight-search.js";
+  //   document.body.appendChild(this.myScriptElement);
+  // }
 }
