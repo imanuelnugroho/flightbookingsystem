@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "flight-booking-frontend:build:production"
+              "buildTarget": "flightbookingsystem:build:production"
             },
             "development": {
-              "buildTarget": "flight-booking-frontend:build:development"
+              "buildTarget": "flightbookingsystem:build:development"
             }
           },
           "defaultConfiguration": "development"

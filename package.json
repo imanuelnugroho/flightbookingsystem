@@ -1,5 +1,5 @@
 {
-  "name": "flight-booking-frontend",
+  "name": "flightbookingsystem",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:flight-booking-frontend": "node dist/flight-booking-frontend/server/server.mjs",
+    "serve:ssr:flightbookingsystem": "node dist/flightbookingsystem/server/server.mjs",
     "build:prod": "ng build --configuration production",
     "deploy": "gh-pages -d dist/flightbookingsystem"
   },
