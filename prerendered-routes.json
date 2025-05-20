@@ -1,0 +1,7 @@
+{
+  "routes": {
+    "/flightbookingsystem": {},
+    "/flightbookingsystem/confirmation": {},
+    "/flightbookingsystem/search-results": {}
+  }
+}
