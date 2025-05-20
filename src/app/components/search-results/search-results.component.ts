@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-search-results',
   imports: [],
   templateUrl: './search-results.component.html',
-  styleUrl: '../../../assets/css/search-results.component.css'
+  // styleUrl: '../../../assets/css/search-results.component.css'
+  styleUrls: ['../../../assets/css/search-results.component.css'],
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class SearchResultsComponent {
   // myScriptElement: HTMLScriptElement | undefined;

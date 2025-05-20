@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation  } from '@angular/core';
 
 @Component({
   selector: 'app-flight-search',
   imports: [],
   templateUrl: './flight-search.component.html',
-  styleUrl: '../../../assets/css/flight-search.component.css'
+  // styleUrl: '../../../assets/css/flight-search.component.css'
+  styleUrls: ['../../../assets/css/flight-search.component.css'],
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class FlightSearchComponent {
   // myScriptElement: HTMLScriptElement | undefined;
