@@ -26,7 +26,7 @@
     <div class="hero-overlay" role="region" aria-live="polite" aria-atomic="true">
       <h1>Book Your Flight</h1>
       <p>Explore our low fares to over 165 destinations worldwide</p>
-      <form class="search-form" role="search" aria-label="Flight search form" id="flightSearchForm">
+      <!-- <form class="search-form" role="search" aria-label="Flight search form" id="flightSearchForm">
         <div class="form-group">
           <label for="fromAirport">From</label>
           <select id="fromAirport" name="fromAirport" required aria-required="true">
@@ -59,7 +59,42 @@
           </select>
         </div>
         <button class="search-button" type="submit" aria-label="Search flights">Search</button>
+      </form> -->
+      <form (submit)="onSearchFormSubmit($event)" id="flightSearchForm">
+        <div class="form-group">
+          <label for="fromAirport">From</label>
+          <select id="fromAirport" name="fromAirport" required>
+            <option value="" disabled selected>Select city</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="toAirport">To</label>
+          <select id="toAirport" name="toAirport" required>
+            <option value="" disabled selected>Select city</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="departDate">Departure</label>
+          <input type="date" id="departDate" name="departDate" required (change)="onDepartureDateChange()" />
+        </div>
+        <div class="form-group">
+          <label for="returnDate">Return</label>
+          <input type="date" id="returnDate" name="returnDate" />
+        </div>
+        <div class="form-group">
+          <label for="passengers">Passengers</label>
+          <select id="passengers" name="passengers" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+        </div>
+        <button class="search-button" type="submit">Search</button>
       </form>
+
       <div id="approvalPanel" class="admin-approval-panel" style="display:none;">
         <h3>Pending User Approvals</h3>
         <table aria-label="User approval requests">
