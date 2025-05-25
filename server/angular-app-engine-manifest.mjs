@@ -1,6 +1,6 @@
 
 export default {
-  basePath: '/flightbookingsystem',
+  basePath: 'https://imanuelnugroho.github.io/flightbookingsystem',
   supportedLocales: {
   "en-US": ""
 },
