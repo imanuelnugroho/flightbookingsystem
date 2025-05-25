@@ -60,7 +60,7 @@
         </div>
         <button class="search-button" type="submit" aria-label="Search flights">Search</button>
       </form> -->
-      <form (submit)="onSearchFormSubmit($event)" id="flightSearchForm">
+      <form (submit)="onSearchFormSubmit($event)" class="search-form" role="search" aria-label="Flight search form" id="flightSearchForm">
         <div class="form-group">
           <label for="fromAirport">From</label>
           <select id="fromAirport" name="fromAirport" required>

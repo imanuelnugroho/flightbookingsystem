@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation  } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-flight-search',
@@ -15,13 +16,15 @@ export class FlightSearchComponent {
     "Taipei", "Tokyo", "Ho Chi Minh City"
   ];
 
-  fromAirport: HTMLSelectElement;
-  toAirport: HTMLSelectElement;
-  departDate: HTMLInputElement;
-  returnDate: HTMLInputElement;
-  passengers: HTMLSelectElement;
+  fromAirport: HTMLSelectElement | undefined;
+  toAirport: HTMLSelectElement | undefined;
+  departDate: HTMLInputElement | undefined;
+  returnDate: HTMLInputElement | undefined;
+  passengers: HTMLSelectElement | undefined;
 
-  constructor() {
+  constructor(private router: Router) { }
+
+  ngAfterViewInit() {
     this.fromAirport = document.getElementById('fromAirport') as HTMLSelectElement;
     this.toAirport = document.getElementById('toAirport') as HTMLSelectElement;
     this.departDate = document.getElementById('departDate') as HTMLInputElement;
@@ -35,67 +38,74 @@ export class FlightSearchComponent {
 
   // Populate the city options
   populateCityOptions(selectElement: HTMLSelectElement): void {
-    // this.cities.forEach(city => {
-    //   const option: HTMLOptionElement = document.createElement('option');
-    //   option.value = city;
-    //   option.textContent = city;
-    //   selectElement.appendChild(option);
-    // });
+    this.cities.forEach(city => {
+      const option: HTMLOptionElement = document.createElement('option');
+      option.value = city;
+      option.textContent = city;
+      selectElement.appendChild(option);
+    });
   }
 
   // Set minimum dates for date inputs
   setMinDates(): void {
-    // const today: string = new Date().toISOString().split('T')[0];
-    // this.departDate.min = today;
-    // this.returnDate.min = today;
+    const today: string = new Date().toISOString().split('T')[0];
+    if(this.departDate) {
+      this.departDate.min = today;
+    }
+    if(this.returnDate){
+      this.returnDate.min = today;
+    }
   }
 
   // Handle departure date change
   onDepartureDateChange(): void {
-    // if (this.departDate.value) {
-    //   this.returnDate.min = this.departDate.value;
-    //   if (this.returnDate.value && this.returnDate.value < this.departDate.value) {
-    //     this.returnDate.value = '';
-    //   }
-    // }
+    if (this.departDate?.value && this.returnDate?.value) {
+      this.returnDate.min = this.departDate.value;
+      if (this.returnDate.value && this.returnDate.value < this.departDate.value) {
+        this.returnDate.value = '';
+      }
+    }
   }
 
   // Handle flight search form submission
   onSearchFormSubmit(event: Event): void {
-    // event.preventDefault();
+    event.preventDefault();
 
-    // const from: string = this.fromAirport.value;
-    // const to: string = this.toAirport.value;
-    // const depart: string = this.departDate.value;
-    // const ret: string = this.returnDate.value;
-    // const passengers: string = this.passengers.value;
+    const formData = new FormData();
 
-    // if (!from || !to) {
-    //   alert("Please select both departure and destination cities.");
-    //   return;
-    // }
-    // if (from === to) {
-    //   alert("Departure and destination cannot be the same.");
-    //   return;
-    // }
-    // if (!depart) {
-    //   alert("Please select a departure date.");
-    //   return;
-    // }
-    // if (ret && ret < depart) {
-    //   alert("Return date cannot be before departure date.");
-    //   return;
-    // }
+    const from: string = this.fromAirport!.value || '';
+    const to: string = this.toAirport!.value || '';
+    const depart: string = this.departDate?.value || '';
+    const ret: string = this.returnDate?.value || '';
+    const passengers: string = this.passengers?.value || '';
 
-    // // Redirect with params encoded
-    // const params: URLSearchParams = new URLSearchParams({
-    //   from: from,
-    //   to: to,
-    //   departDate: depart,
-    //   returnDate: ret || "",
-    //   passengers: passengers
-    // });
-    // window.location.href = `web/search-results.html?${params.toString()}`;
+    if (!from || !to) {
+      alert("Please select both departure and destination cities.");
+      return;
+    }
+    if (from === to) {
+      alert("Departure and destination cannot be the same.");
+      return;
+    }
+    if (!depart) {
+      alert("Please select a departure date.");
+      return;
+    }
+    if (ret && ret < depart) {
+      alert("Return date cannot be before departure date.");
+      return;
+    }
+
+    // Redirect with params encoded
+    const params: URLSearchParams = new URLSearchParams({
+      from: from,
+      to: to,
+      departDate: depart,
+      returnDate: ret,
+      passengers: passengers
+    });
+    window.location.href = `./search-results.html?${params.toString()}`;
+        this.router.navigate(['/search-results', params]);
   }
   
 }
