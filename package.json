@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:flightbookingsystem": "node dist/flightbookingsystem/server/server.mjs",
-    "build:prod": "ng build --configuration production --base-href https://imanuelnugroho.github.io/flightbookingsystem/",
+    "build:prod": "ng build --configuration production --output-dir docs --base-href https://imanuelnugroho.github.io/flightbookingsystem/",
     "deploy": "gh-pages -d dist/flightbookingsystem",
     "postbuild": "rm -rf docs/* && cp -r dist/flightbookingsystem/browser docs/ && cp -rf docs/browser/* docs/ && rm -rf docs/browser"
   },
