@@ -10,8 +10,7 @@
     "serve:ssr:flightbookingsystem": "node dist/flightbookingsystem/server/server.mjs",
     "build:prod": "ng build --configuration production --base-href https://imanuelnugroho.github.io/flightbookingsystem/",
     "deploy": "gh-pages -d dist/flightbookingsystem",
-    "postbuild": "rm -rf docs/* && cp -r dist/flightbookingsystem/browser docs/ && cp -rf docs/browser/* docs/ && rm -rf docs/browser",
-    "postbuild:prod": "rm -rf docs/* && cp -r dist/flightbookingsystem/browser docs/ && cp -rf docs/browser/* docs/ && rm -rf docs/browser"
+    "postbuild": "rm -rf docs/* && cp -r dist/flightbookingsystem/browser docs/ && cp -rf docs/browser/* docs/ && rm -rf docs/browser"
   },
   "private": true,
   "dependencies": {
