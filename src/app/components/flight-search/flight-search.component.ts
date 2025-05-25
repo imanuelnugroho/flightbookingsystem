@@ -45,19 +45,19 @@ export class FlightSearchComponent {
 
   // Set minimum dates for date inputs
   setMinDates(): void {
-    const today: string = new Date().toISOString().split('T')[0];
-    this.departDate.min = today;
-    this.returnDate.min = today;
+    // const today: string = new Date().toISOString().split('T')[0];
+    // this.departDate.min = today;
+    // this.returnDate.min = today;
   }
 
   // Handle departure date change
   onDepartureDateChange(): void {
-    if (this.departDate.value) {
-      this.returnDate.min = this.departDate.value;
-      if (this.returnDate.value && this.returnDate.value < this.departDate.value) {
-        this.returnDate.value = '';
-      }
-    }
+    // if (this.departDate.value) {
+    //   this.returnDate.min = this.departDate.value;
+    //   if (this.returnDate.value && this.returnDate.value < this.departDate.value) {
+    //     this.returnDate.value = '';
+    //   }
+    // }
   }
 
   // Handle flight search form submission
