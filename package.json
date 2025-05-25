@@ -9,7 +9,8 @@
     "test": "ng test",
     "serve:ssr:flightbookingsystem": "node dist/flightbookingsystem/server/server.mjs",
     "build:prod": "ng build --configuration production",
-    "deploy": "gh-pages -d dist/flightbookingsystem"
+    "deploy": "gh-pages -d dist/flightbookingsystem",
+    "postbuild": "cp -r dist/flightbookingsystem/browser docs"
   },
   "private": true,
   "dependencies": {
