@@ -104,8 +104,8 @@ export class FlightSearchComponent {
       returnDate: ret,
       passengers: passengers
     });
-    window.location.href = `./search-results.html?${params.toString()}`;
-        this.router.navigate(['/search-results', params]);
+    // window.location.href = `./search-results.html?${params.toString()}`;
+    this.router.navigate(['/search-results', params]);
   }
   
 }
