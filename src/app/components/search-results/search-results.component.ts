@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-results',
@@ -15,4 +16,9 @@ export class SearchResultsComponent {
   //   this.myScriptElement.src = "../../../assets/js/search-results.js";
   //   document.body.appendChild(this.myScriptElement);
   // }
+  constructor(private router: Router) { }
+
+  sendMeHome() {
+    this.router.navigate(['home']);
+  }
 }

@@ -7,5 +7,6 @@ export const routes: Routes = [
     { path: '', component: FlightSearchComponent },
     { path: 'search-results', component: SearchResultsComponent },
     { path: 'confirmation', component: ConfirmationComponent },
+    { path: 'home', redirectTo: 'flight-search.component', pathMatch: 'full' },
     { path: '**', redirectTo: '' } // Redirect to home for unknown routes
 ];
